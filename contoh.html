@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+      }
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+      .community-card {
+        padding: 20px;
+      }
+      .community-header {
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/api/placeholder/800/300");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      .community-header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(67, 97, 238, 0.7), rgba(255, 119, 0, 0.5));
+        z-index: 0;
+      }
+      .community-header-content {
+        position: relative;
+        z-index: 1;
+      }
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+      }
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+      .section-icon {
+        color: var(--accent-color);
+        margin-left: 10px;
+      }
+      .post-card {
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        background-color: var(--card-bg);
+        transition: all 0.3s;
+      }
+      .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+      .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .post-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+      }
+      .post-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .post-info h6 {
+        margin-bottom: 0;
+        font-weight: 600;
+      }
+      .post-date {
+        font-size: 12px;
+        color: #6c757d;
+      }
+      .post-content {
+        margin-bottom: 15px;
+      }
+      .post-image {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      .post-image img {
+        width: 100%;
+        height: auto;
+      }
+      .post-actions {
+        display: flex;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding-top: 15px;
+      }
+      .post-action {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        color: #6c757d;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .post-action:hover {
+        color: var(--primary-color);
+      }
+      .post-action i {
+        margin-right: 5px;
+      }
+      .community-sidebar {
+        position: sticky;
+        top: 20px;
+      }
+      .community-members {
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .member-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        transition: all 0.3s;
+      }
+      .member-item:hover {
+        transform: translateX(5px);
+      }
+      .member-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+      }
+      .member-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .member-info h6 {
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .member-role {
+        font-size: 12px;
+        color: #6c757d;
+      }
+      .community-trending {
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 20px;
+      }
+      .trending-item {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      .trending-item:last-child {
+        border-bottom: none;
+      }
+      .trending-tag {
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+      .trending-count {
+        font-size: 12px;
+        color: #6c757d;
+      }
+      .post-form {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      }
+      .post-form-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .post-form textarea {
+        border-radius: 10px;
+        resize: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+      .post-form-actions {
+        display: flex;
+        justify-content: space-between;
+      }
+      .post-form-attachments {
+        display: flex;
+      }
+      .attachment-btn {
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        color: #6c757d;
+        transition: all 0.3s;
+      }
+      .attachment-btn:hover {
+        background-color: var(--hover-bg);
+        color: var(--primary-color);
+      }
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 500;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        transition: all 0.3s;
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+      }
+      .community-tabs {
+        display: flex;
+        margin-bottom: 30px;
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 10px;
+      }
+      .community-tab {
+        flex: 1;
+        text-align: center;
+        padding: 12px;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .community-tab.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+      }
+      .community-tab:hover:not(.active) {
+        background-color: var(--hover-bg);
+      }
+      .comment-section {
+        padding-left: 65px;
+        margin-top: 15px;
+      }
+      .comment {
+        display: flex;
+        margin-bottom: 15px;
+      }
+      .comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+      }
+      .comment-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .comment-content {
+        flex: 1;
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 15px;
+      }
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+      .comment-name {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .comment-time {
+        font-size: 12px;
+        color: #6c757d;
+      }
+      .comment-text {
+        font-size: 14px;
+      }
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+      }
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+      .notification-icon {
+        position: relative;
+      }
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+      }
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      } /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .community-header,
+      .post-card,
+      .community-members,
+      .community-trending {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+      .post-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .post-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .post-card:nth-child(3) {
+        animation-delay: 0.3s;
+      } /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+      .event-card {
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+      }
+      .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+      .event-image {
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+      }
+      .event-content {
+        padding: 20px;
+        background-color: white;
+      }
+      .event-date {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+      .event-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .event-desc {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 15px;
+      }
+      .event-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .event-attendees {
+        display: flex;
+      }
+      .event-attendee {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid white;
+        margin-left: -10px;
+      }
+      .event-attendee:first-child {
+        margin-left: 0;
+      }
+      .event-attendee img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .event-more {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--sidebar-bg);
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        margin-left: -10px;
+        border: 2px solid white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a> <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a> <a href="downloads.html" class="nav-link"> <i class="fas fa-download"></i> Downloads <span class="badge-menu">1</span> </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a> <a href="community.html" class="nav-link active"> <i class="fas fa-users"></i> Community <span class="badge-menu">3</span> </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a> <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <h4>Developer Community</h4>
+        <div class="d-flex align-items-center">
+          <div class="search-container"><i class="fas fa-search search-icon"></i> <input type="text" class="form-control" placeholder="Search community" /></div>
+          <div class="notification-icon me-4"><i class="fas fa-bell"></i> <span class="notification-badge">3</span></div>
+          <div class="user-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" /></div>
+        </div>
+      </div>
+      <!-- Community Header -->
+      <div class="community-header">
+        <div class="community-header-content">
+          <div class="d-flex align-items-center mb-3">
+            <h2 class="me-3 mb-0">Developer Connect</h2>
+            <span class="badge bg-light text-dark">1,245 Members</span>
+          </div>
+          <p>A community of passionate developers sharing ideas, projects, and collaborating on innovative solutions.</p>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-primary me-3"><i class="fas fa-plus me-2"></i> Join Community</button> <button class="btn btn-outline-light"><i class="fas fa-share-alt me-2"></i> Share</button>
+          </div>
+        </div>
+      </div>
+      <!-- Community Tabs -->
+      <div class="community-tabs">
+        <div class="community-tab active">All Posts</div>
+        <div class="community-tab">Announcements</div>
+        <div class="community-tab">Questions</div>
+        <div class="community-tab">Projects</div>
+        <div class="community-tab">Events</div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Post Form -->
+          <div class="post-form">
+            <div class="post-form-header">
+              <div class="user-avatar me-3"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Your Avatar" /></div>
+              <h6 class="mb-0">Start a discussion, Wira</h6>
+            </div>
+            <textarea class="form-control" rows="3" placeholder="What's on your mind?"></textarea>
+            <div class="post-form-actions">
+              <div class="post-form-attachments">
+                <button class="attachment-btn"><i class="fas fa-image"></i></button> <button class="attachment-btn"><i class="fas fa-code"></i></button> <button class="attachment-btn"><i class="fas fa-link"></i></button>
+                <button class="attachment-btn"><i class="fas fa-poll"></i></button>
+              </div>
+              <button class="btn btn-primary">Post</button>
+            </div>
+          </div>
+          <!-- Community Posts -->
+          <div class="post-card">
+            <div class="post-header">
+              <div class="post-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" /></div>
+              <div class="post-info">
+                <h6>Anita Putri <span class="badge bg-primary">Moderator</span></h6>
+                <div class="post-date">Posted 2 hours ago</div>
+              </div>
+            </div>
+            <div class="post-content">
+              <p>Hello everyone! 👋 I'm excited to announce our upcoming webinar on "Advanced React Patterns for Production Applications" scheduled for next week. This session will cover:</p>
+              <ul>
+                <li>Component composition strategies</li>
+                <li>State management patterns</li>
+                <li>Performance optimization techniques</li>
+                <li>Testing methodologies</li>
+              </ul>
+              <p>Make sure to register using the link below. Hope to see many of you there!</p>
+              <div class="post-image"><img src="/api/placeholder/600/300" alt="Webinar Banner" /></div>
+            </div>
+            <div class="post-actions">
+              <div class="post-action"><i class="fas fa-thumbs-up"></i> 24</div>
+              <div class="post-action"><i class="fas fa-comment"></i> 8</div>
+              <div class="post-action"><i class="fas fa-share"></i> Share</div>
+              <div class="post-action"><i class="fas fa-bookmark"></i> Save</div>
+            </div>
+            <div class="comment-section">
+              <div class="comment">
+                <div class="comment-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Commenter Avatar" /></div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <div class="comment-name">Budi Santoso</div>
+                    <div class="comment-time">1 hour ago</div>
+                  </div>
+                  <div class="comment-text">This looks amazing! I've been struggling with component composition in my latest project. Looking forward to learning more.</div>
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Commenter Avatar" /></div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <div class="comment-name">Dina Sanjaya</div>
+                    <div class="comment-time">45 minutes ago</div>
+                  </div>
+                  <div class="comment-text">Will there be a recording for those who can't attend live?</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="post-card">
+            <div class="post-header">
+              <div class="post-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" /></div>
+              <div class="post-info">
+                <h6>Wira Sukma Saputra <span class="badge bg-success">Author</span></h6>
+                <div class="post-date">Posted yesterday</div>
+              </div>
+            </div>
+            <div class="post-content">
+              <p>I just launched my new open-source project - a lightweight React component library with accessibility baked in! Check it out and let me know what you think. Any contributions or feedback are welcome! 🚀</p>
+              <pre class="bg-light p-3 rounded">npm install @wirasukma/react-components</pre>
+              <div class="post-image"><img src="/api/placeholder/600/300" alt="Project Screenshot" /></div>
+            </div>
+            <div class="post-actions">
+              <div class="post-action"><i class="fas fa-thumbs-up"></i> 57</div>
+              <div class="post-action"><i class="fas fa-comment"></i> 12</div>
+              <div class="post-action"><i class="fas fa-share"></i> Share</div>
+              <div class="post-action"><i class="fas fa-bookmark"></i> Save</div>
+            </div>
+          </div>
+          <div class="post-card">
+            <div class="post-header">
+              <div class="post-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" /></div>
+              <div class="post-info">
+                <h6>Arman Maulana</h6>
+                <div class="post-date">Posted 3 days ago</div>
+              </div>
+            </div>
+            <div class="post-content">
+              <p>Looking for recommendations on the best state management solution for a large-scale e-commerce application. Currently considering:</p>
+              <ul>
+                <li>Redux + Redux Toolkit</li>
+                <li>MobX</li>
+                <li>Zustand</li>
+                <li>Context API + useReducer</li>
+              </ul>
+              <p>The app has complex data flows and needs to handle real-time updates. What has worked well for your enterprise projects?</p>
+            </div>
+            <div class="post-actions">
+              <div class="post-action"><i class="fas fa-thumbs-up"></i> 18</div>
+              <!-- Continuing from previous code - this starts midway through the post-actions in the last post card -->
+              <div class="post-action"><i class="fas fa-comment"></i> 32</div>
+              <div class="post-action"><i class="fas fa-share"></i> Share</div>
+              <div class="post-action"><i class="fas fa-bookmark"></i> Save</div>
+            </div>
+            <div class="comment-section">
+              <div class="comment">
+                <div class="comment-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Commenter Avatar" /></div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <div class="comment-name">Wira Sukma Saputra</div>
+                    <div class="comment-time">2 days ago</div>
+                  </div>
+                  <div class="comment-text">I've had great success with Redux Toolkit on large projects. The DevTools and middleware ecosystem are unmatched for debugging complex state flows.</div>
+                </div>
+              </div>
+              <div class="comment">
+                <div class="comment-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Commenter Avatar" /></div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <div class="comment-name">Fadli Rahman</div>
+                    <div class="comment-time">1 day ago</div>
+                  </div>
+                  <div class="comment-text">Zustand is worth considering if you want something lightweight yet powerful. Much less boilerplate than Redux.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- More Post Cards -->
+          <div class="post-card">
+            <div class="post-header">
+              <div class="post-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" /></div>
+              <div class="post-info">
+                <h6>Dina Sanjaya <span class="badge bg-info">Contributor</span></h6>
+                <div class="post-date">Posted 4 days ago</div>
+              </div>
+            </div>
+            <div class="post-content">
+              <p>Just finished my first project using Next.js 14 with Server Components and the App Router. Sharing some key learnings:</p>
+              <ol>
+                <li>Server Components dramatically reduce client-side JavaScript</li>
+                <li>Data fetching in the component where you need the data feels so natural</li>
+                <li>Parallel routes are game-changing for complex layouts</li>
+                <li>The new caching strategy takes time to understand but is powerful</li>
+              </ol>
+              <p>Has anyone else migrated from pages to app router? What was your experience?</p>
+              <div class="post-image"><img src="/api/placeholder/600/300" alt="Next.js Project" /></div>
+            </div>
+            <div class="post-actions">
+              <div class="post-action"><i class="fas fa-thumbs-up"></i> 43</div>
+              <div class="post-action"><i class="fas fa-comment"></i> 19</div>
+              <div class="post-action"><i class="fas fa-share"></i> Share</div>
+              <div class="post-action"><i class="fas fa-bookmark"></i> Save</div>
+            </div>
+          </div>
+          <!-- Pagination -->
+          <nav aria-label="Community posts navigation" class="mt-4 mb-4">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Right Sidebar -->
+        <div class="col-md-4">
+          <div class="community-sidebar">
+            <!-- Upcoming Events Section -->
+            <div class="section-title">Upcoming Events <i class="fas fa-calendar section-icon"></i></div>
+            <div class="event-card">
+              <div class="event-image" style="background-image: url('/api/placeholder/400/200')"></div>
+              <div class="event-content">
+                <span class="event-date">Apr 15, 2025 · 7:00 PM</span>
+                <h5 class="event-title">React Patterns Webinar</h5>
+                <p class="event-desc">Learn advanced React patterns and techniques for building scalable applications.</p>
+                <div class="event-footer">
+                  <div class="event-attendees">
+                    <div class="event-attendee"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Attendee 1" /></div>
+                    <div class="event-attendee"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Attendee 2" /></div>
+                    <div class="event-attendee"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Attendee 3" /></div>
+                    <div class="event-more">+42</div>
+                  </div>
+                  <button class="btn btn-sm btn-primary">Join</button>
+                </div>
+              </div>
+            </div>
+            <div class="event-card">
+              <div class="event-image" style="background-image: url('/api/placeholder/400/200')"></div>
+              <div class="event-content">
+                <span class="event-date">Apr 22, 2025 · 6:30 PM</span>
+                <h5 class="event-title">Code Review Workshop</h5>
+                <p class="event-desc">Improve your code review skills and learn best practices for collaborative development.</p>
+                <div class="event-footer">
+                  <div class="event-attendees">
+                    <div class="event-attendee"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Attendee 1" /></div>
+                    <div class="event-attendee"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Attendee 2" /></div>
+                    <div class="event-more">+18</div>
+                  </div>
+                  <button class="btn btn-sm btn-primary">Join</button>
+                </div>
+              </div>
+            </div>
+            <!-- Community Members -->
+            <div class="section-title mt-4">Active Members <i class="fas fa-users section-icon"></i></div>
+            <div class="community-members">
+              <div class="member-item">
+                <div class="member-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Member 1" /></div>
+                <div class="member-info">
+                  <h6>Anita Putri</h6>
+                  <div class="member-role">Moderator · Web Designer</div>
+                </div>
+              </div>
+              <div class="member-item">
+                <div class="member-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Member 2" /></div>
+                <div class="member-info">
+                  <h6>Budi Santoso</h6>
+                  <div class="member-role">Backend Developer</div>
+                </div>
+              </div>
+              <div class="member-item">
+                <div class="member-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Member 3" /></div>
+                <div class="member-info">
+                  <h6>Dina Sanjaya</h6>
+                  <div class="member-role">Contributor · UX Designer</div>
+                </div>
+              </div>
+              <div class="member-item">
+                <div class="member-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Member 4" /></div>
+                <div class="member-info">
+                  <h6>Fadli Rahman</h6>
+                  <div class="member-role">Full Stack Developer</div>
+                </div>
+              </div>
+              <div class="member-item">
+                <div class="member-avatar"><img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Member 5" /></div>
+                <div class="member-info">
+                  <h6>Gita Purnama</h6>
+                  <div class="member-role">Mobile Developer</div>
+                </div>
+              </div>
+              <div class="text-center mt-3"><a href="#" class="btn btn-sm btn-outline-primary">View All Members</a></div>
+            </div>
+            <!-- Trending Topics -->
+            <div class="section-title mt-4">Trending Topics <i class="fas fa-fire section-icon"></i></div>
+            <div class="community-trending">
+              <div class="trending-item">
+                <div class="trending-tag">#ReactJS</div>
+                <div class="trending-count">138 discussions</div>
+              </div>
+              <div class="trending-item">
+                <div class="trending-tag">#NextJS</div>
+                <div class="trending-count">92 discussions</div>
+              </div>
+              <div class="trending-item">
+                <div class="trending-tag">#TypeScript</div>
+                <div class="trending-count">87 discussions</div>
+              </div>
+              <div class="trending-item">
+                <div class="trending-tag">#AIIntegration</div>
+                <div class="trending-count">73 discussions</div>
+              </div>
+              <div class="trending-item">
+                <div class="trending-tag">#WebPerformance</div>
+                <div class="trending-count">56 discussions</div>
+              </div>
+              <div class="trending-item">
+                <div class="trending-tag">#UI/UXDesign</div>
+                <div class="trending-count">49 discussions</div>
+              </div>
+            </div>
+            <!-- Community Guidelines -->
+            <div class="card mt-4">
+              <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle me-2"></i> Community Guidelines</h5>
+                <ul class="mb-0 ps-3">
+                  <li>Be respectful and inclusive</li>
+                  <li>Stay on topic in discussions</li>
+                  <li>Give credit when sharing content</li>
+                  <li>No self-promotion without context</li>
+                  <li>Help others when you can</li>
+                </ul>
+                <a href="#" class="btn btn-sm btn-outline-primary mt-3">Read Full Guidelines</a>
+              </div>
+            </div>
+            <!-- Social Media Links -->
+            <div class="mt-4 text-center">
+              <a href="https://github.com/wirasukma" class="btn-icon me-2" title="GitHub"> <i class="fab fa-github"></i> </a>
+              <a href="https://linkedin.com/in/wirasukma" class="btn-icon me-2" title="LinkedIn"> <i class="fab fa-linkedin"></i> </a>
+              <a href="https://instagram.com/wirasukma" class="btn-icon me-2" title="Instagram"> <i class="fab fa-instagram"></i> </a>
+              <a href="mailto:wira.sukma@example.com" class="btn-icon" title="Email"> <i class="fas fa-envelope"></i> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

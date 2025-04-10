@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-card {
+        height: 200px;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .feature-card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: white;
+      }
+
+      .card-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .hero-section {
+        background-color: #e67e22;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/api/placeholder/800/400");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content {
+        max-width: 50%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(67, 97, 238, 0.7), rgba(255, 119, 0, 0.5));
+        z-index: 0;
+      }
+
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 500;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        transition: all 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 1.5px solid white;
+        color: white;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+
+      .btn-outline:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+      }
+
+      .btn-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        margin-left: 10px;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .btn-icon:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+        color: white;
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .section-icon {
+        color: var(--accent-color);
+        margin-left: 10px;
+      }
+
+      .category-label {
+        font-size: 12px;
+        color: #6c757d;
+        margin-bottom: 5px;
+      }
+
+      .continue-watching {
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .watching-item {
+        display: flex;
+        margin-bottom: 20px;
+        align-items: center;
+        transition: all 0.3s;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      .watching-item:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+        transform: translateX(5px);
+      }
+
+      .watching-thumbnail {
+        width: 80px;
+        height: 50px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-right: 15px;
+        position: relative;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .watching-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .play-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        background-color: rgba(67, 97, 238, 0.8);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+
+      .watching-item:hover .play-icon {
+        background-color: var(--accent-color);
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+
+      .friend-activity {
+        margin-top: 30px;
+      }
+
+      .friend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        transition: all 0.3s;
+      }
+
+      .friend-item:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+        transform: translateX(5px);
+      }
+
+      .friend-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 15px;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+      }
+
+      .friend-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .friend-activity-details {
+        font-size: 14px;
+      }
+
+      .friend-name {
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+
+      .notification-icon {
+        position: relative;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-menu {
+        display: flex;
+      }
+
+      .nav-menu-item {
+        margin: 0 15px;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-menu-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .nav-menu-item.active {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .active-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-section,
+      .card,
+      .continue-watching {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link active"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <div class="nav-menu">
+          <div class="nav-menu-item active"><span class="active-dot"></span>New</div>
+          <div class="nav-menu-item">Portfolio</div>
+          <div class="nav-menu-item">Projects</div>
+          <div class="nav-menu-item">Skills</div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search" />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="hero-content">
+          <span class="badge bg-light text-dark mb-2">Portofolio</span>
+          <span class="badge bg-secondary mb-2">Developer</span>
+          <h2>Wira Sukma Saputra</h2>
+          <p class="mb-4">Full-stack developer dengan keahlian dalam pengembangan web, analisis data, dan visualisasi. Menciptakan solusi inovatif untuk tantangan digital saat ini.</p>
+          <button class="btn btn-primary me-2"><i class="fas fa-play me-2"></i> Contact</button>
+          <button class="btn btn-outline"><i class="fas fa-info-circle me-2"></i> More Info</button>
+
+          <div class="mt-3">
+            <img src="https://i.pinimg.com/736x/7b/13/c4/7b13c4010f71529c8eb05dd34d14a419.jpg" alt="User 1" class="rounded-circle" width="40" height="40" />
+            <img src="https://i.pinimg.com/736x/7b/13/c4/7b13c4010f71529c8eb05dd34d14a419.jpg" alt="User 2" class="rounded-circle ms-n2" width="40" height="40" />
+            <img src="https://i.pinimg.com/736x/7b/13/c4/7b13c4010f71529c8eb05dd34d14a419.jpg" alt="User 3" class="rounded-circle ms-n2" width="40" height="40" />
+            <span class="text-white ms-2">Friends are following</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Columns -->
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Trending Section -->
+          <div class="section-title">Featured Projects <i class="fas fa-fire section-icon"></i></div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">2023</span>
+                  <div class="feature-card-content">
+                    <h5>Data Dashboard</h5>
+                    <div class="category-label">Analytics, Dashboard</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">2022</span>
+                  <div class="feature-card-content">
+                    <h5>E-Commerce App</h5>
+                    <div class="category-label">Mobile, E-commerce</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">2023</span>
+                  <div class="feature-card-content">
+                    <h5>Portfolio CMS</h5>
+                    <div class="category-label">Web, CMS</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coming Soon Section -->
+          <div class="section-title mt-4">Upcoming Projects</div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">Q2 2025</span>
+                  <div class="feature-card-content">
+                    <h5>AI Assistant</h5>
+                    <div class="category-label">AI, Machine Learning</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">Q3 2025</span>
+                  <div class="feature-card-content">
+                    <h5>Game Development</h5>
+                    <div class="category-label">Unity, 3D</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">Q1 2025</span>
+                  <div class="feature-card-content">
+                    <h5>Smart Home App</h5>
+                    <div class="category-label">IoT, Mobile</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">Q1 2025</span>
+                  <div class="feature-card-content">
+                    <h5>Smart Home App</h5>
+                    <div class="category-label">IoT, Mobile</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">Q1 2025</span>
+                  <div class="feature-card-content">
+                    <h5>Smart Home App</h5>
+                    <div class="category-label">IoT, Mobile</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="feature-card" style="background-image: url('https://cdn.dribbble.com/userupload/12103318/file/original-364ca7cd05e57ca0d207fdef1d4d2bf5.png?resize=1024x728&vertical=center')">
+                  <span class="card-badge">Q1 2025</span>
+                  <div class="feature-card-content">
+                    <h5>Smart Home App</h5>
+                    <div class="category-label">IoT, Mobile</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-md-4">
+          <div class="continue-watching">
+            <h5 class="mb-4">Recent Projects</h5>
+
+            <div class="watching-item">
+              <div class="watching-thumbnail">
+                <img src="https://i.pinimg.com/736x/4b/43/3c/4b433cdc1e6a42211f43426d91afad12.jpg" alt="Project 1" />
+                <div class="play-icon">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+              <div>
+                <h6 class="mb-1">E-commerce Platform</h6>
+                <div class="category-label">Web, React</div>
+                <small>2023</small>
+              </div>
+            </div>
+
+            <div class="watching-item">
+              <div class="watching-thumbnail">
+                <img src="https://i.pinimg.com/736x/4b/43/3c/4b433cdc1e6a42211f43426d91afad12.jpg" alt="Project 2" />
+                <div class="play-icon">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+              <div>
+                <h6 class="mb-1">Inventory Management</h6>
+                <div class="category-label">Web, Database</div>
+                <small>2022</small>
+              </div>
+            </div>
+
+            <div class="watching-item">
+              <div class="watching-thumbnail">
+                <img src="https://i.pinimg.com/736x/4b/43/3c/4b433cdc1e6a42211f43426d91afad12.jpg" alt="Project 3" />
+                <div class="play-icon">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+              <div>
+                <h6 class="mb-1">Mobile Fitness App</h6>
+                <div class="category-label">Mobile, Health</div>
+                <small>2023</small>
+              </div>
+            </div>
+
+            <!-- Friend Activity -->
+            <div class="friend-activity">
+              <h5 class="mb-4">Network Activity</h5>
+
+              <div class="friend-item">
+                <div class="friend-avatar">
+                  <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Friend 1" />
+                </div>
+                <div class="friend-activity-details">
+                  <div class="friend-name">Arman Maulana</div>
+                  <div>Is now following your work</div>
+                </div>
+              </div>
+
+              <div class="friend-item">
+                <div class="friend-avatar">
+                  <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Friend 2" />
+                </div>
+                <div class="friend-activity-details">
+                  <div class="friend-name">Dina Sanjaya</div>
+                  <div>Liked your E-commerce Project</div>
+                </div>
+              </div>
+
+              <div class="friend-item">
+                <div class="friend-avatar">
+                  <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Friend 3" />
+                </div>
+                <div class="friend-activity-details">
+                  <div class="friend-name">Fadli Rahman</div>
+                  <div>Shared your Mobile App</div>
+                </div>
+              </div>
+
+              <div class="friend-item">
+                <div class="friend-avatar">
+                  <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Friend 4" />
+                </div>
+                <div class="friend-activity-details">
+                  <div class="friend-name">Anita Putri</div>
+                  <div>Is now connected with you</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="mt-4 text-center">
+            <a href="https://github.com/wirasukma" class="btn-icon me-2" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/wirasukma" class="btn-icon me-2" title="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://instagram.com/wirasukma" class="btn-icon me-2" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="mailto:wira.sukma@example.com" class="btn-icon" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

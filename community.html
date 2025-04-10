@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+        --border-radius: 15px;
+        --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* Sidebar Improvements */
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 25px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        z-index: 1000;
+        box-shadow: 3px 0 10px rgba(0, 0, 0, 0.03);
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 5px 15px;
+        border-radius: 12px;
+        transition: var(--transition);
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: var(--transition);
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+        color: var(--primary-color);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      /* Main Content Area */
+      .main-content {
+        margin-left: 250px;
+        padding: 30px;
+      }
+
+      /* Card Improvements */
+      .card {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        border: none;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+        margin-bottom: 25px;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Section Titles */
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 12px;
+        font-size: 20px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .section-icon {
+        color: var(--accent-color);
+        margin-left: 12px;
+        font-size: 18px;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-section,
+      .card,
+      .discussion-card,
+      .event-card,
+      .member-card {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+
+      /* Community Header */
+      .community-header {
+        background: linear-gradient(135deg, var(--primary-color), #7a5af8);
+        border-radius: var(--border-radius);
+        padding: 35px;
+        color: white;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+      }
+
+      .community-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("/api/placeholder/800/400");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.15;
+        z-index: 0;
+      }
+
+      .community-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .community-content h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .community-stats {
+        display: flex;
+        gap: 30px;
+        margin-top: 25px;
+      }
+
+      .stat-item {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px 30px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+      }
+
+      .stat-item:hover {
+        transform: translateY(-3px);
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .stat-number {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* Search and Navigation */
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 12px 15px 12px 45px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: var(--transition);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        font-size: 14px;
+      }
+
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+        outline: none;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .notification-icon {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--sidebar-bg);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .notification-icon:hover {
+        background-color: var(--hover-bg);
+        transform: scale(1.05);
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: var(--transition);
+        cursor: pointer;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-menu {
+        display: flex;
+        background-color: var(--sidebar-bg);
+        border-radius: 30px;
+        padding: 5px;
+      }
+
+      .nav-menu-item {
+        margin: 0 5px;
+        font-weight: 500;
+        padding: 10px 18px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .nav-menu-item:hover {
+        background-color: var(--hover-bg);
+        color: var(--primary-color);
+      }
+
+      .nav-menu-item.active {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .active-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      /* Discussion Cards */
+      .discussion-card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      .discussion-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .discussion-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .discussion-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+        overflow: hidden;
+        border: 3px solid var(--sidebar-bg);
+      }
+
+      .discussion-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .discussion-info h5 {
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .discussion-date {
+        font-size: 13px;
+        color: #6c757d;
+      }
+
+      .discussion-content p {
+        color: #495057;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .discussion-tags {
+        margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .discussion-tag {
+        display: inline-block;
+        background-color: var(--sidebar-bg);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-right: 10px;
+        margin-bottom: 8px;
+        transition: var(--transition);
+        font-weight: 500;
+      }
+
+      .discussion-tag:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.2);
+      }
+
+      .discussion-actions {
+        display: flex;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .discussion-action {
+        display: flex;
+        align-items: center;
+        margin-right: 25px;
+        color: #6c757d;
+        transition: var(--transition);
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .discussion-action:hover {
+        color: var(--primary-color);
+        transform: translateY(-2px);
+      }
+
+      .discussion-action i {
+        margin-right: 7px;
+        font-size: 16px;
+      }
+
+      /* Events */
+      .event-card {
+        position: relative;
+        background-color: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        margin-bottom: 25px;
+        transition: var(--transition);
+        height: 100%;
+      }
+
+      .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .event-img {
+        height: 160px;
+        overflow: hidden;
+      }
+
+      .event-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.6s;
+      }
+
+      .event-card:hover .event-img img {
+        transform: scale(1.1) rotate(1deg);
+      }
+
+      .event-date {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        box-shadow: 0 3px 8px rgba(255, 119, 0, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .event-content {
+        padding: 25px;
+      }
+
+      .event-content h5 {
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .event-meta {
+        display: flex;
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .event-meta-item {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+      }
+
+      .event-meta-item i {
+        margin-right: 8px;
+        color: var(--primary-color);
+      }
+
+      .event-attendees {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .attendee {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid white;
+        margin-right: -12px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .attendee:hover {
+        transform: translateY(-3px) scale(1.1);
+        z-index: 1;
+      }
+
+      .attendee img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .attendees-count {
+        background-color: var(--sidebar-bg);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 500;
+        margin-left: 8px;
+        border: 2px solid white;
+      }
+
+      /* Member Cards */
+      .member-card {
+        border-radius: var(--border-radius);
+        background-color: white;
+        overflow: hidden;
+        transition: var(--transition);
+        height: 100%;
+        box-shadow: var(--box-shadow);
+      }
+
+      .member-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .member-header {
+        height: 80px;
+        position: relative;
+      }
+
+      .member-avatar {
+        position: absolute;
+        bottom: -30px;
+        left: 20px;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .member-card:hover .member-avatar {
+        transform: scale(1.1);
+      }
+
+      .member-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .member-info {
+        padding: 45px 20px 20px;
+      }
+
+      .member-name {
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 18px;
+      }
+
+      .member-title {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .member-stats {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .member-stat {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--primary-color);
+      }
+
+      .member-footer {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .connect-btn {
+        background: var(--active-gradient);
+        color: white;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .connect-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+      }
+
+      .message-btn {
+        background-color: var(--sidebar-bg);
+        color: var(--text-color);
+        border: none;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .message-btn:hover {
+        background-color: var(--hover-bg);
+        transform: translateY(-2px);
+      }
+
+      /* Trending Topics */
+      .trending-topics {
+        background-color: white;
+        border-radius: var(--border-radius);
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .trending-topics h5 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .topic-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .topic-item:last-child {
+        border-bottom: none;
+      }
+
+      .topic-item:hover {
+        transform: translateX(8px);
+      }
+
+      .topic-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: white;
+        font-size: 18px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .topic-item:hover .topic-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .icon-web {
+        background: linear-gradient(45deg, #4facfe, #00f2fe);
+      }
+
+      .icon-ai {
+        background: linear-gradient(45deg, #fa709a, #fee140);
+      }
+
+      .icon-ux {
+        background: linear-gradient(45deg, #43e97b, #38f9d7);
+      }
+
+      .icon-data {
+        background: linear-gradient(45deg, #5f72bd, #9b23ea);
+      }
+
+      .icon-mobile {
+        background: linear-gradient(45deg, #ff5858, #f09819);
+      }
+
+      .topic-content h6 {
+        margin-bottom: 3px;
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      .topic-stats {
+        font-size: 13px;
+        color: #6c757d;
+      }
+
+      .topic-stats i {
+        color: #ff5858;
+      }
+
+      /* Online Members */
+      .online-members {
+        background-color: white;
+        border-radius: var(--border-radius);
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .online-members h5 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .online-member {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+      }
+
+      .online-member:last-child {
+        border-bottom: none;
+      }
+
+      .online-member:hover {
+        transform: translateX(8px);
+      }
+
+      .online-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 15px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid var(--sidebar-bg);
+      }
+
+      .online-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .online-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #4cd964;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Action Buttons */
+      .create-btn {
+        display: block;
+        background: var(--active-gradient);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        padding: 14px;
+        text-align: center;
+        font-weight: 500;
+        margin-top: 25px;
+        box-shadow: 0 5px 12px rgba(67, 97, 238, 0.3);
+        transition: var(--transition);
+        text-decoration: none;
+      }
+
+      .create-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(67, 97, 238, 0.4);
+        color: white;
+        text-decoration: none;
+      }
+
+      .btn-floating {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--active-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        transition: var(--transition);
+        z-index: 1000;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn-floating:hover {
+        transform: rotate(45deg) scale(1.1);
+        box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
+        color: white;
+      }
+
+      /* Announcements */
+      .card.p-4 h5 {
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .bg-primary,
+      .bg-success {
+        border-radius: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Responsive adjustments for smaller screens */
+      @media (max-width: 992px) {
+        .main-content {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        .sidebar {
+          transform: translateX(-260px);
+        }
+
+        /* Add a sidebar toggle for mobile */
+        .sidebar-toggle {
+          display: block;
+          position: fixed;
+          top: 15px;
+          left: 15px;
+          z-index: 1001;
+          background: var(--primary-color);
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar.show {
+          transform: translateX(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .community-stats {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .search-container input {
+          width: 180px;
+        }
+
+        .search-container input:focus {
+          width: 220px;
+        }
+
+        .nav-menu {
+          overflow-x: auto;
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+          white-space: nowrap;
+          scrollbar-width: none;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link active">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <div class="nav-menu">
+          <div class="nav-menu-item active"><span class="active-dot"></span>Trending</div>
+          <div class="nav-menu-item">Latest Discussions</div>
+          <div class="nav-menu-item">Events</div>
+          <div class="nav-menu-item">Members</div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search community" />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="/api/placeholder/45/45" alt="User Avatar" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Community Header -->
+      <div class="community-header">
+        <div class="community-content">
+          <h2>Developer Community</h2>
+          <p class="mb-4">Connect, share, learn and grow with fellow developers from around the world.</p>
+
+          <div class="community-stats">
+            <div class="stat-item">
+              <div class="stat-number">1,245</div>
+              <div class="stat-label">Members</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">87</div>
+              <div class="stat-label">Online</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">324</div>
+              <div class="stat-label">Topics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Columns -->
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Discussion Section -->
+          <div class="section-title">Latest Discussions <i class="fas fa-comment-dots section-icon"></i></div>
+
+          <div class="discussion-card">
+            <div class="discussion-header">
+              <div class="discussion-avatar">
+                <img src="/api/placeholder/45/45" alt="User Avatar" />
+              </div>
+              <div class="discussion-info">
+                <h5>How to improve website performance?</h5>
+                <div class="discussion-date">Posted by <span class="fw-bold">Anita Putri</span> • 2 hours ago</div>
+              </div>
+            </div>
+            <div class="discussion-content">
+              <p>
+                I'm working on optimizing a large e-commerce site and facing challenges with load times. Has anyone implemented lazy loading with intersection observers recently? Any tips on image optimization strategies that work well with
+                modern browsers?
+              </p>
+            </div>
+            <div class="discussion-tags">
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>Web Development</span>
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>Performance</span>
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>JavaScript</span>
+            </div>
+            <div class="discussion-actions">
+              <div class="discussion-action"><i class="fas fa-comment"></i> 12 Comments</div>
+              <div class="discussion-action"><i class="fas fa-heart"></i> 24 Likes</div>
+              <div class="discussion-action"><i class="fas fa-bookmark"></i> Save</div>
+              <div class="discussion-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+          </div>
+
+          <div class="discussion-card">
+            <div class="discussion-header">
+              <div class="discussion-avatar">
+                <img src="/api/placeholder/45/45" alt="User Avatar" />
+              </div>
+              <div class="discussion-info">
+                <h5>Machine Learning for beginners - where to start?</h5>
+                <div class="discussion-date">Posted by <span class="fw-bold">Fadli Rahman</span> • 5 hours ago</div>
+              </div>
+            </div>
+            <div class="discussion-content">
+              <p>
+                I've been coding for a while but want to dive into ML. There are so many resources out there it's overwhelming. What are some good starting points that don't require a math PhD? Any recommendations for practical projects to
+                build while learning?
+              </p>
+            </div>
+            <div class="discussion-tags">
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>Machine Learning</span>
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>AI</span>
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>Data Science</span>
+            </div>
+            <div class="discussion-actions">
+              <div class="discussion-action"><i class="fas fa-comment"></i> 32 Comments</div>
+              <div class="discussion-action"><i class="fas fa-heart"></i> 47 Likes</div>
+              <div class="discussion-action"><i class="fas fa-bookmark"></i> Save</div>
+              <div class="discussion-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+          </div>
+
+          <div class="discussion-card">
+            <div class="discussion-header">
+              <div class="discussion-avatar">
+                <img src="/api/placeholder/45/45" alt="User Avatar" />
+              </div>
+              <div class="discussion-info">
+                <h5>Best practices for React component architecture in 2025</h5>
+                <div class="discussion-date">Posted by <span class="fw-bold">Dina Sanjaya</span> • 1 day ago</div>
+              </div>
+            </div>
+            <div class="discussion-content">
+              <p>
+                Now that React has matured, I'm curious about how others are structuring their components. Are you still using custom hooks extensively? How are you handling global state now? And what patterns are you following for API
+                integrations?
+              </p>
+            </div>
+            <div class="discussion-tags">
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>React</span>
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>Architecture</span>
+              <span class="discussion-tag"><i class="fas fa-tag me-1"></i>Frontend</span>
+            </div>
+            <div class="discussion-actions">
+              <div class="discussion-action"><i class="fas fa-comment"></i> 27 Comments</div>
+              <div class="discussion-action"><i class="fas fa-heart"></i> 36 Likes</div>
+              <div class="discussion-action"><i class="fas fa-bookmark"></i> Save</div>
+              <div class="discussion-action"><i class="fas fa-share"></i> Share</div>
+            </div>
+          </div>
+
+          <!-- Events Section -->
+          <div class="section-title mt-5">Upcoming Events <i class="fas fa-calendar-alt section-icon"></i></div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="event-card">
+                <div class="event-img">
+                  <img src="/api/placeholder/300/150" alt="Tech Conference" />
+                </div>
+                <span class="event-date">Apr 15, 2025</span>
+                <div class="event-content">
+                  <h5>Web Developer Summit 2025</h5>
+                  <div class="event-meta">
+                    <div class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Jakarta Convention Center</div>
+                    <div class="event-meta-item"><i class="fas fa-clock"></i> 09:00 - 17:00</div>
+                  </div>
+                  <p>Join top web developers for a day of inspiring talks, workshops, and networking opportunities.</p>
+                  <div class="event-attendees">
+                    <div class="attendee">
+                      <img src="/api/placeholder/30/30" alt="Attendee 1" />
+                    </div>
+                    <div class="attendee">
+                      <img src="/api/placeholder/30/30" alt="Attendee 2" />
+                    </div>
+                    <div class="attendee">
+                      <img src="/api/placeholder/30/30" alt="Attendee 3" />
+                    </div>
+                    <div class="attendee">
+                      <img src="/api/placeholder/30/30" alt="Attendee 4" />
+                    </div>
+                    <div class="attendees-count">+42</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="event-card">
+                <div class="event-img">
+                  <img src="/api/placeholder/300/150" alt="AI Meetup" />
+                </div>
+                <span class="event-date">Apr 20, 2025</span>
+                <div class="event-content">
+                  <h5>AI/ML Developer Meetup</h5>
+                  <div class="event-meta">
+                    <div class="event-meta-item"><i class="fas fa-map-marker-alt"></i> Digital Hub Bandung</div>
+                    <div class="event-meta-item"><i class="fas fa-clock"></i> 18:30 - 21:00</div>
+                  </div>
+                  <p>An evening of lightning talks and demos focusing on practical machine learning applications.</p>
+                  <div class="event-attendees">
+                    <div class="attendee">
+                      <img src="/api/placeholder/30/30" alt="Attendee 1" />
+                    </div>
+                    <div class="attendee">
+                      <img src="/api/placeholder/30/30" alt="Attendee 2" />
+                    </div>
+                    <div class="attendee">
+                      <img src="/api/placeholder/30/30" alt="Attendee 3" />
+                    </div>
+                    <div class="attendees-count">+28</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Members Section -->
+          <div class="section-title mt-5">Active Members <i class="fas fa-user-friends section-icon"></i></div>
+
+          <div class="row">
+            <div class="col-md-4 mb-4">
+              <div class="member-card">
+                <div class="member-header" style="background: linear-gradient(45deg, #4158d0, #c850c0)"></div>
+                <div class="member-avatar">
+                  <img src="/api/placeholder/60/60" alt="Member 1" />
+                </div>
+                <div class="member-info">
+                  <h5 class="member-name">Arman Maulana</h5>
+                  <div class="member-title">Frontend Developer</div>
+                  <div class="member-stats">
+                    <div class="member-stat">
+                      <div class="stat-value">58</div>
+                      <div>Posts</div>
+                    </div>
+                    <div class="member-stat">
+                      <div class="stat-value">124</div>
+                      <div>Following</div>
+                    </div>
+                    <div class="member-stat">
+                      <div class="stat-value">96</div>
+                      <div>Followers</div>
+                    </div>
+                  </div>
+                  <div class="member-footer">
+                    <button class="connect-btn"><i class="fas fa-plus me-1"></i> Connect</button>
+                    <button class="message-btn"><i class="fas fa-envelope me-1"></i> Message</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="member-card">
+                <div class="member-header" style="background: linear-gradient(45deg, #43e97b, #38f9d7)"></div>
+                <div class="member-avatar">
+                  <img src="/api/placeholder/60/60" alt="Member 2" />
+                </div>
+                <div class="member-info">
+                  <h5 class="member-name">Dina Sanjaya</h5>
+                  <div class="member-title">Backend Developer</div>
+                  <div class="member-stats">
+                    <div class="member-stat">
+                      <div class="stat-value">42</div>
+                      <div>Posts</div>
+                    </div>
+                    <div class="member-stat">
+                      <div class="stat-value">87</div>
+                      <div>Following</div>
+                    </div>
+                    <div class="member-stat">
+                      <div class="stat-value">112</div>
+                      <div>Followers</div>
+                    </div>
+                  </div>
+                  <div class="member-footer">
+                    <button class="connect-btn"><i class="fas fa-user-check me-1"></i> Connected</button>
+                    <button class="message-btn"><i class="fas fa-envelope me-1"></i> Message</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+              <div class="member-card">
+                <div class="member-header" style="background: linear-gradient(45deg, #fa709a, #fee140)"></div>
+                <div class="member-avatar">
+                  <img src="/api/placeholder/60/60" alt="Member 3" />
+                </div>
+                <div class="member-info">
+                  <h5 class="member-name">Fadli Rahman</h5>
+                  <div class="member-title">UI/UX Designer</div>
+                  <div class="member-stats">
+                    <div class="member-stat">
+                      <div class="stat-value">37</div>
+                      <div>Posts</div>
+                    </div>
+                    <div class="member-stat">
+                      <div class="stat-value">95</div>
+                      <div>Following</div>
+                    </div>
+                    <div class="member-stat">
+                      <div class="stat-value">78</div>
+                      <div>Followers</div>
+                    </div>
+                  </div>
+                  <div class="member-footer">
+                    <button class="connect-btn"><i class="fas fa-plus me-1"></i> Connect</button>
+                    <button class="message-btn"><i class="fas fa-envelope me-1"></i> Message</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-md-4">
+          <!-- Trending Topics -->
+          <div class="trending-topics">
+            <h5 class="mb-4">Trending Topics</h5>
+
+            <div class="topic-item">
+              <div class="topic-icon icon-web">
+                <i class="fas fa-code"></i>
+              </div>
+              <div class="topic-content">
+                <h6>Web Development</h6>
+                <div class="topic-stats"><i class="fas fa-fire me-1"></i> 25 new discussions today</div>
+              </div>
+            </div>
+
+            <div class="topic-item">
+              <div class="topic-icon icon-ai">
+                <i class="fas fa-brain"></i>
+              </div>
+              <div class="topic-content">
+                <h6>AI & Machine Learning</h6>
+                <div class="topic-stats"><i class="fas fa-fire me-1"></i> 18 new discussions today</div>
+              </div>
+            </div>
+
+            <div class="topic-item">
+              <div class="topic-icon icon-ux">
+                <i class="fas fa-pencil-ruler"></i>
+              </div>
+              <div class="topic-content">
+                <h6>UI/UX Design</h6>
+                <div class="topic-stats"><i class="fas fa-fire me-1"></i> 14 new discussions today</div>
+              </div>
+            </div>
+
+            <div class="topic-item">
+              <div class="topic-icon icon-data">
+                <i class="fas fa-database"></i>
+              </div>
+              <div class="topic-content">
+                <h6>Data Science</h6>
+                <div class="topic-stats"><i class="fas fa-fire me-1"></i> 12 new discussions today</div>
+              </div>
+            </div>
+
+            <div class="topic-item">
+              <div class="topic-icon icon-mobile">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <div class="topic-content">
+                <h6>Mobile Development</h6>
+                <div class="topic-stats"><i class="fas fa-fire me-1"></i> 10 new discussions today</div>
+              </div>
+            </div>
+
+            <a href="#" class="create-btn"> <i class="fas fa-plus me-2"></i> Create New Topic </a>
+          </div>
+
+          <!-- Online Members -->
+          <div class="online-members">
+            <h5 class="mb-4">Members Online</h5>
+
+            <div class="online-member">
+              <div class="online-avatar">
+                <img src="/api/placeholder/40/40" alt="Online Member 1" />
+                <span class="online-indicator"></span>
+              </div>
+              <div>
+                <div class="fw-bold">Anita Putri</div>
+                <small class="text-muted">Active now</small>
+              </div>
+            </div>
+
+            <div class="online-member">
+              <div class="online-avatar">
+                <img src="/api/placeholder/40/40" alt="Online Member 2" />
+                <span class="online-indicator"></span>
+              </div>
+              <div>
+                <div class="fw-bold">Budi Santoso</div>
+                <small class="text-muted">Active now</small>
+              </div>
+            </div>
+
+            <div class="online-member">
+              <div class="online-avatar">
+                <img src="/api/placeholder/40/40" alt="Online Member 3" />
+                <span class="online-indicator"></span>
+              </div>
+              <div>
+                <div class="fw-bold">Citra Dewi</div>
+                <small class="text-muted">Active now</small>
+              </div>
+            </div>
+
+            <div class="online-member">
+              <div class="online-avatar">
+                <img src="/api/placeholder/40/40" alt="Online Member 4" />
+                <span class="online-indicator"></span>
+              </div>
+              <div>
+                <div class="fw-bold">Deni Hermawan</div>
+                <small class="text-muted">Active now</small>
+              </div>
+            </div>
+
+            <div class="online-member">
+              <div class="online-avatar">
+                <img src="/api/placeholder/40/40" alt="Online Member 5" />
+                <span class="online-indicator"></span>
+              </div>
+              <div>
+                <div class="fw-bold">Eka Yulianti</div>
+                <small class="text-muted">Active now</small>
+              </div>
+            </div>
+
+            <a href="#" class="text-center d-block mt-3 text-primary"> See all online members (87) </a>
+          </div>
+
+          <!-- Community Announcements -->
+          <div class="card p-4 mb-4">
+            <h5 class="mb-3">Community Announcements</h5>
+            <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+              <div class="bg-primary text-white rounded p-2 me-3">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <div>
+                <div class="fw-bold">New Community Guidelines</div>
+                <small class="text-muted">Posted 2 days ago</small>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-success text-white rounded p-2 me-3">
+                <i class="fas fa-award"></i>
+              </div>
+              <div>
+                <div class="fw-bold">Monthly Challenge Winners</div>
+                <small class="text-muted">Posted 4 days ago</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Button -->
+    <a href="#" class="btn-floating">
+      <i class="fas fa-plus"></i>
+    </a>
+
+    <!-- Mobile Sidebar Toggle Button -->
+    <div class="sidebar-toggle d-lg-none">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // JavaScript for mobile sidebar toggle
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.querySelector(".sidebar-toggle");
+        const sidebar = document.querySelector(".sidebar");
+
+        if (toggleBtn && sidebar) {
+          toggleBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("show");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

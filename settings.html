@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 25px;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 500;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        transition: all 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .section-icon {
+        color: var(--accent-color);
+        margin-left: 10px;
+      }
+
+      .notification-icon {
+        position: relative;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+
+      /* Settings page specific styles */
+      .settings-header {
+        background: linear-gradient(to right, rgba(67, 97, 238, 0.8), rgba(58, 86, 212, 0.9));
+        border-radius: 15px;
+        padding: 25px;
+        color: white;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .settings-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+      }
+
+      .settings-header::after {
+        content: "";
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      .settings-icon {
+        background: rgba(255, 255, 255, 0.2);
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .settings-nav {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        padding: 5px;
+        margin-bottom: 30px;
+        display: flex;
+        overflow-x: auto;
+      }
+
+      .settings-nav-item {
+        padding: 12px 20px;
+        border-radius: 10px;
+        margin: 5px;
+        cursor: pointer;
+        white-space: nowrap;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+
+      .settings-nav-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .settings-nav-item.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .form-control {
+        border-radius: 10px;
+        padding: 12px 15px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+      }
+
+      .form-control:focus {
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        border-color: var(--primary-color);
+      }
+
+      .custom-switch {
+        padding-left: 3rem;
+      }
+
+      .custom-control-label::before {
+        width: 48px;
+        height: 24px;
+        border-radius: 20px;
+        left: -3rem;
+      }
+
+      .custom-control-label::after {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        left: calc(-3rem + 3px);
+        top: calc(0.25rem + 3px);
+        background-color: white;
+      }
+
+      .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .custom-control-input:checked ~ .custom-control-label::after {
+        transform: translateX(24px);
+      }
+
+      .color-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .color-option:hover {
+        transform: scale(1.2);
+      }
+
+      .color-option.active::after {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 14px;
+      }
+
+      .theme-preview {
+        height: 80px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .theme-preview::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .theme-preview:hover::before {
+        opacity: 1;
+      }
+
+      .theme-preview.active::after {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--primary-color);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .profile-upload {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto 20px;
+      }
+
+      .profile-upload img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .upload-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .profile-upload:hover .upload-overlay {
+        opacity: 1;
+      }
+
+      .social-input {
+        position: relative;
+      }
+
+      .social-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .social-input input {
+        padding-left: 40px;
+      }
+
+      /* Animation for the settings cards */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animated-card {
+        animation: fadeInUp 0.5s ease forwards;
+      }
+
+      .animated-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .animated-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .animated-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .animated-card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link active"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <h4 class="mb-0">Settings</h4>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search settings..." />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Header -->
+      <div class="settings-header">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="settings-icon">
+              <i class="fas fa-cog fa-lg"></i>
+            </div>
+            <h3>Personalize Your Portfolio</h3>
+            <p class="mb-0">Customize your profile, appearance, and preferences</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <button class="btn btn-light me-2"><i class="fas fa-sync-alt me-2"></i>Reset All</button>
+            <button class="btn btn-light"><i class="fas fa-question-circle me-2"></i>Help</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Navigation -->
+      <div class="settings-nav">
+        <div class="settings-nav-item active"><i class="fas fa-user me-2"></i>Profile</div>
+        <div class="settings-nav-item"><i class="fas fa-palette me-2"></i>Appearance</div>
+        <div class="settings-nav-item"><i class="fas fa-bell me-2"></i>Notifications</div>
+        <div class="settings-nav-item"><i class="fas fa-lock me-2"></i>Privacy & Security</div>
+        <div class="settings-nav-item"><i class="fas fa-globe me-2"></i>Language</div>
+        <div class="settings-nav-item"><i class="fas fa-project-diagram me-2"></i>Portfolio Display</div>
+      </div>
+
+      <div class="row">
+        <!-- Profile Settings -->
+        <div class="col-lg-8">
+          <div class="card animated-card p-4">
+            <h5 class="mb-4">Personal Information</h5>
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-control" value="Wira" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-control" value="Sukma Saputra" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" value="wira.sukma@example.com" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" value="+62 812 3456 7890" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="form-label">Bio</label>
+                    <textarea class="form-control" rows="4">Full-stack developer dengan keahlian dalam pengembangan web, analisis data, dan visualisasi. Menciptakan solusi inovatif untuk tantangan digital saat ini.</textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" class="form-control" value="Jakarta, Indonesia" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Website</label>
+                    <input type="url" class="form-control" value="https://wirasukma.dev" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="card animated-card p-4 mt-4">
+            <h5 class="mb-4">Social Media Links</h5>
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">GitHub</label>
+                    <div class="social-input">
+                      <i class="fab fa-github social-icon"></i>
+                      <input type="text" class="form-control" value="github.com/wirasukma" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">LinkedIn</label>
+                    <div class="social-input">
+                      <i class="fab fa-linkedin social-icon"></i>
+                      <input type="text" class="form-control" value="linkedin.com/in/wirasukma" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Instagram</label>
+                    <div class="social-input">
+                      <i class="fab fa-instagram social-icon"></i>
+                      <input type="text" class="form-control" value="instagram.com/wirasukma" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Twitter</label>
+                    <div class="social-input">
+                      <i class="fab fa-twitter social-icon"></i>
+                      <input type="text" class="form-control" value="twitter.com/wirasukma" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Behance</label>
+                    <div class="social-input">
+                      <i class="fab fa-behance social-icon"></i>
+                      <input type="text" class="form-control" value="behance.net/wirasukma" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Dribbble</label>
+                    <div class="social-input">
+                      <i class="fab fa-dribbble social-icon"></i>
+                      <input type="text" class="form-control" value="dribbble.com/wirasukma" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="card animated-card p-4 mt-4">
+            <h5 class="mb-4">Account Settings</h5>
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" value="wirasukma" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" value="********" />
+                  </div>
+                </div>
+                <div class="col-12 mt-4">
+                  <h6>Account Preferences</h6>
+                  <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="twoFactorAuth" checked />
+                    <label class="form-check-label ms-2" for="twoFactorAuth">Enable Two-Factor Authentication</label>
+                  </div>
+                  <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="activityLog" />
+                    <label class="form-check-label ms-2" for="activityLog">Send me a weekly activity log</label>
+                  </div>
+                  <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="sessionTimeout" checked />
+                    <label class="form-check-label ms-2" for="sessionTimeout">Auto logout after inactivity (30 minutes)</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-end">
+            <button class="btn btn-light me-2">Cancel</button>
+            <button class="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-lg-4">
+          <div class="card animated-card p-4 text-center">
+            <h5 class="mb-4">Profile Picture</h5>
+            <div class="profile-upload">
+              <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+              <div class="upload-overlay">
+                <i class="fas fa-camera fa-lg text-white"></i>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary btn-sm">Upload New Picture</button>
+            <button class="btn btn-outline-danger btn-sm mt-2">Remove</button>
+          </div>
+
+          <div class="card animated-card p-4 mt-4">
+            <h5 class="mb-4">Theme Settings</h5>
+            <div class="mb-3">
+              <label class="form-label">Theme Mode</label>
+              <div class="d-flex">
+                <div class="form-check me-3">
+                  <input class="form-check-input" type="radio" name="themeMode" id="lightMode" checked />
+                  <label class="form-check-label" for="lightMode">Light</label>
+                </div>
+                <div class="form-check me-3">
+                  <input class="form-check-input" type="radio" name="themeMode" id="darkMode" />
+                  <label class="form-check-label" for="darkMode">Dark</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="themeMode" id="autoMode" />
+                  <label class="form-check-label" for="autoMode">Auto</label>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Accent Color</label>
+              <div class="d-flex">
+                <div class="color-option active" style="background-color: #4361ee"></div>
+                <div class="color-option" style="background-color: #ff7700"></div>
+                <div class="color-option" style="background-color: #10b981"></div>
+                <div class="color-option" style="background-color: #f43f5e"></div>
+                <div class="color-option" style="background-color: #8b5cf6"></div>
+              </div>
+            </div>
+            <div>
+              <label class="form-label">Theme Style</label>
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <div class="theme-preview active" style="background: linear-gradient(90deg, #4361ee, #3a56d4)">Default</div>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="theme-preview" style="background: linear-gradient(90deg, #3a0ca3, #4361ee)">Modern</div>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="theme-preview" style="background: linear-gradient(90deg, #f72585, #b5179e)">Vibrant</div>
+                </div>
+                <div class="col-6 mb-3">
+                  <div class="theme-preview" style="background: linear-gradient(90deg, #3d5a80, #293241)">Subtle</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card animated-card p-4 mt-4">
+            <h5 class="mb-4">Display Settings</h5>
+            <div class="mb-3">
+              <label class="form-label">Font Size</label>
+              <select class="form-select">
+                <option>Small</option>
+                <option selected>Medium</option>
+                <option>Large</option>
+                <option>Extra Large</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Animation Speed</label>
+              <input type="range" class="form-range" min="0" max="2" step="0.5" value="1" />
+              <div class="d-flex justify-content-between">
+                <small>Slow</small>
+                <small>Normal</small>
+                <small>Fast</small>
+              </div>
+            </div>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" id="reduceMotion" />
+              <label class="form-check-label ms-2" for="reduceMotion">Reduce Motion</label>
+            </div>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" id="highContrast" />
+              <label class="form-check-label ms-2" for="highContrast">High Contrast</label>
+            </div>
+          </div>
+
+          <div class="card animated-card p-4 mt-4">
+            <h5 class="mb-4">Portfolio Sidebar</h5>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="collapseMenu" />
+              <label class="form-check-label ms-2" for="collapseMenu">Auto-collapse Sidebar</label>
+            </div>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" id="showLabels" checked />
+              <label class="form-check-label ms-2" for="showLabels">Show Menu Labels</label>
+            </div>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" id="showNotifications" checked />
+              <label class="form-check-label ms-2" for="showNotifications">Show Notification Badges</label>
+            </div>
+            <div class="form-check form-switch mt-3">
+              <input class="form-check-input" type="checkbox" id="stickyMenu" checked />
+              <label class="form-check-label ms-2" for="stickyMenu">Sticky Sidebar</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Settings Sections -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card animated-card p-4">
+            <h5 class="mb-4">Notification Preferences</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Portfolio Comments</h6>
+                    <small class="text-muted">Get notified when someone comments on your work</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="commentsNotif" checked />
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Friend Requests</h6>
+                    <small class="text-muted">Get notified when someone sends you a connection request</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="friendNotif" checked />
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Project Likes</h6>
+                    <small class="text-muted">Get notified when someone likes your projects</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="likesNotif" checked />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Community Updates</h6>
+                    <small class="text-muted">Receive news and updates from developer community</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="communityNotif" />
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Email Notifications</h6>
+                    <small class="text-muted">Receive email alerts about important activities</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="emailNotif" checked />
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Project Recommendations</h6>
+                    <small class="text-muted">Get personalized project recommendations</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="recommendationNotif" checked />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card animated-card p-4">
+            <h5 class="mb-4">Privacy Settings</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-4">
+                  <label class="form-label">Who can see your profile</label>
+                  <select class="form-select">
+                    <option>Everyone</option>
+                    <option selected>Connections only</option>
+                    <option>Only me</option>
+                  </select>
+                </div>
+                <div class="form-group mb-4">
+                  <label class="form-label">Who can contact you</label>
+                  <select class="form-select">
+                    <option selected>Everyone</option>
+                    <option>Connections only</option>
+                    <option>Nobody</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-4">
+                  <label class="form-label">Project visibility</label>
+                  <select class="form-select">
+                    <option selected>Public</option>
+                    <option>Connections only</option>
+                    <option>Private</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Activity status</label>
+                  <select class="form-select">
+                    <option selected>Show when active</option>
+                    <option>Hide activity status</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="searchIndexing" checked />
+                  <label class="form-check-label ms-2" for="searchIndexing">Allow search engines to index your profile</label>
+                </div>
+                <div class="form-check form-switch mt-3">
+                  <input class="form-check-input" type="checkbox" id="dataSharing" />
+                  <label class="form-check-label ms-2" for="dataSharing">Share usage data to improve services</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4 mb-5">
+        <div class="col-12">
+          <div class="card animated-card p-4">
+            <h5 class="mb-4">Advanced Settings</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Developer Mode</h6>
+                    <small class="text-muted">Enable advanced features and debugging tools</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="devMode" />
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Experimental Features</h6>
+                    <small class="text-muted">Try new features before they're officially released</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="experimentalFeatures" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">Auto-backup Portfolio</h6>
+                    <small class="text-muted">Automatically backup your portfolio weekly</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="autoBackup" checked />
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h6 class="mb-0">API Access</h6>
+                    <small class="text-muted">Allow external applications to access your data</small>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="apiAccess" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mt-4">
+                <div class="alert alert-info d-flex align-items-center">
+                  <i class="fas fa-info-circle me-3 fa-lg"></i>
+                  <div>Data exports and account deletion options are available in the <a href="#" class="alert-link">Account Management</a> section.</div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 text-center">
+              <button class="btn btn-primary">Save All Settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Simple toggling between settings tabs
+      document.addEventListener("DOMContentLoaded", function () {
+        const navItems = document.querySelectorAll(".settings-nav-item");
+
+        navItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            navItems.forEach((navItem) => navItem.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+
+        // Color option selection
+        const colorOptions = document.querySelectorAll(".color-option");
+        colorOptions.forEach((option) => {
+          option.addEventListener("click", function () {
+            colorOptions.forEach((opt) => opt.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+
+        // Theme preview selection
+        const themeOptions = document.querySelectorAll(".theme-preview");
+        themeOptions.forEach((option) => {
+          option.addEventListener("click", function () {
+            themeOptions.forEach((opt) => opt.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

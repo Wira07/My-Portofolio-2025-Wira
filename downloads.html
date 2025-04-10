@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Downloads - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 20px;
+        background-color: var(--card-bg);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 500;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        transition: all 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 1.5px solid var(--primary-color);
+        color: var(--primary-color);
+        padding: 8px 20px;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .section-icon {
+        color: var(--accent-color);
+        margin-left: 10px;
+      }
+
+      .download-card {
+        display: flex;
+        padding: 20px;
+        align-items: center;
+      }
+
+      .download-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #f0f4ff, #e2e8ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        font-size: 24px;
+        color: var(--primary-color);
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.1);
+        transition: all 0.3s;
+      }
+
+      .card:hover .download-icon {
+        transform: scale(1.1);
+        background: var(--active-gradient);
+        color: white;
+      }
+
+      .download-info {
+        flex-grow: 1;
+      }
+
+      .download-size {
+        color: #6c757d;
+        font-size: 14px;
+        margin-right: 15px;
+      }
+
+      .download-date {
+        color: #6c757d;
+        font-size: 14px;
+      }
+
+      .download-progress {
+        height: 6px;
+        border-radius: 10px;
+        margin: 10px 0;
+        background-color: #e9ecef;
+      }
+
+      .download-progress .progress-bar {
+        background: var(--active-gradient);
+        border-radius: 10px;
+      }
+
+      .download-actions {
+        min-width: 100px;
+        text-align: right;
+      }
+
+      .btn-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(67, 97, 238, 0.1);
+        color: var(--primary-color);
+        margin-left: 8px;
+        transition: all 0.3s;
+        border: none;
+      }
+
+      .btn-icon:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+        color: white;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+      }
+
+      .download-tag {
+        display: inline-block;
+        padding: 3px 10px;
+        background-color: rgba(67, 97, 238, 0.1);
+        color: var(--primary-color);
+        border-radius: 20px;
+        font-size: 12px;
+        margin-right: 8px;
+        transition: all 0.3s;
+      }
+
+      .card:hover .download-tag {
+        background-color: rgba(67, 97, 238, 0.2);
+      }
+
+      .storage-usage {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+      }
+
+      .storage-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .storage-title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .storage-details {
+        display: flex;
+        align-items: center;
+      }
+
+      .storage-used {
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .storage-total {
+        color: #6c757d;
+      }
+
+      .storage-progress {
+        height: 8px;
+        border-radius: 10px;
+        margin: 5px 0 15px;
+        background-color: #e9ecef;
+      }
+
+      .storage-progress .progress-bar {
+        background: var(--active-gradient);
+        border-radius: 10px;
+      }
+
+      .storage-types {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+      }
+
+      .storage-type {
+        text-align: center;
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+        transition: all 0.3s;
+      }
+
+      .storage-type:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .storage-type-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        font-size: 16px;
+      }
+
+      .icon-code {
+        background-color: rgba(67, 97, 238, 0.1);
+        color: var(--primary-color);
+      }
+
+      .icon-image {
+        background-color: rgba(255, 119, 0, 0.1);
+        color: var(--accent-color);
+      }
+
+      .icon-document {
+        background-color: rgba(52, 168, 83, 0.1);
+        color: #34a853;
+      }
+
+      .icon-other {
+        background-color: rgba(108, 117, 125, 0.1);
+        color: #6c757d;
+      }
+
+      .storage-type-size {
+        font-weight: 600;
+      }
+
+      .storage-type-label {
+        font-size: 12px;
+        color: #6c757d;
+      }
+
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-container input:focus {
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .notification-icon {
+        position: relative;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .filter-container {
+        display: flex;
+        margin-bottom: 20px;
+      }
+
+      .filter-btn {
+        background-color: var(--sidebar-bg);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        margin-right: 10px;
+        font-size: 14px;
+        color: #6c757d;
+        transition: all 0.3s;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .completed-icon {
+        width: 18px;
+        height: 18px;
+        background-color: #34a853;
+        color: white;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        margin-left: 5px;
+      }
+
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card,
+      .storage-usage {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link active">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <div class="d-flex align-items-center">
+          <h4 class="mb-0">Downloads</h4>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search downloads" />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Storage Usage -->
+      <div class="storage-usage">
+        <div class="storage-header">
+          <div class="storage-title">Storage Usage</div>
+          <div class="storage-details">
+            <span class="storage-used me-2">26.5 GB</span>
+            <span class="storage-total">of 50 GB used</span>
+          </div>
+        </div>
+        <div class="storage-progress">
+          <div class="progress-bar" role="progressbar" style="width: 53%" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="storage-types">
+          <div class="storage-type">
+            <div class="storage-type-icon icon-code">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="storage-type-size">10.2 GB</div>
+            <div class="storage-type-label">Source Code</div>
+          </div>
+          <div class="storage-type">
+            <div class="storage-type-icon icon-image">
+              <i class="fas fa-image"></i>
+            </div>
+            <div class="storage-type-size">8.5 GB</div>
+            <div class="storage-type-label">Assets</div>
+          </div>
+          <div class="storage-type">
+            <div class="storage-type-icon icon-document">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="storage-type-size">5.3 GB</div>
+            <div class="storage-type-label">Documents</div>
+          </div>
+          <div class="storage-type">
+            <div class="storage-type-icon icon-other">
+              <i class="fas fa-archive"></i>
+            </div>
+            <div class="storage-type-size">2.5 GB</div>
+            <div class="storage-type-label">Other</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-container">
+        <button class="filter-btn active">All Files</button>
+        <button class="filter-btn">In Progress</button>
+        <button class="filter-btn">Completed</button>
+        <button class="filter-btn">Source Code</button>
+        <button class="filter-btn">Assets</button>
+        <button class="filter-btn">Documents</button>
+      </div>
+
+      <!-- Main Content Sections -->
+      <div class="section-title">Recent Downloads <i class="fas fa-clock section-icon"></i></div>
+
+      <!-- Download Items -->
+      <div class="card">
+        <div class="download-card">
+          <div class="download-icon">
+            <i class="fas fa-file-code"></i>
+          </div>
+          <div class="download-info">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">React Native UI Kit</h5>
+              <div>
+                <span class="download-size">450 MB</span>
+                <span class="download-date">Today, 14:25</span>
+              </div>
+            </div>
+            <div>
+              <span class="download-tag">UI Components</span>
+              <span class="download-tag">Mobile</span>
+            </div>
+            <div class="download-progress mt-2">
+              <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="download-actions">
+            <button class="btn-icon"><i class="fas fa-pause"></i></button>
+            <button class="btn-icon"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="download-card">
+          <div class="download-icon">
+            <i class="fas fa-film"></i>
+          </div>
+          <div class="download-info">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">Animation Assets Pack</h5>
+              <div>
+                <span class="download-size">1.2 GB</span>
+                <span class="download-date">Today, 10:12</span>
+                <span class="completed-icon"><i class="fas fa-check"></i></span>
+              </div>
+            </div>
+            <div>
+              <span class="download-tag">Animation</span>
+              <span class="download-tag">Assets</span>
+            </div>
+            <div class="download-progress mt-2">
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="download-actions">
+            <button class="btn-icon"><i class="fas fa-folder-open"></i></button>
+            <button class="btn-icon"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="download-card">
+          <div class="download-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <div class="download-info">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">MySQL Database Backup</h5>
+              <div>
+                <span class="download-size">320 MB</span>
+                <span class="download-date">Yesterday, 18:45</span>
+                <span class="completed-icon"><i class="fas fa-check"></i></span>
+              </div>
+            </div>
+            <div>
+              <span class="download-tag">Database</span>
+              <span class="download-tag">Backup</span>
+            </div>
+            <div class="download-progress mt-2">
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="download-actions">
+            <button class="btn-icon"><i class="fas fa-folder-open"></i></button>
+            <button class="btn-icon"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="download-card">
+          <div class="download-icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="download-info">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">Documentation Templates</h5>
+              <div>
+                <span class="download-size">45 MB</span>
+                <span class="download-date">Yesterday, 15:30</span>
+                <span class="completed-icon"><i class="fas fa-check"></i></span>
+              </div>
+            </div>
+            <div>
+              <span class="download-tag">Templates</span>
+              <span class="download-tag">Documentation</span>
+            </div>
+            <div class="download-progress mt-2">
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="download-actions">
+            <button class="btn-icon"><i class="fas fa-folder-open"></i></button>
+            <button class="btn-icon"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Previous Downloads Section -->
+      <div class="section-title mt-4">Previous Downloads <i class="fas fa-history section-icon"></i></div>
+
+      <div class="card">
+        <div class="download-card">
+          <div class="download-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="download-info">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">Docker Development Environment</h5>
+              <div>
+                <span class="download-size">2.1 GB</span>
+                <span class="download-date">Apr 5, 2025</span>
+                <span class="completed-icon"><i class="fas fa-check"></i></span>
+              </div>
+            </div>
+            <div>
+              <span class="download-tag">DevOps</span>
+              <span class="download-tag">Docker</span>
+            </div>
+            <div class="download-progress mt-2">
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="download-actions">
+            <button class="btn-icon"><i class="fas fa-folder-open"></i></button>
+            <button class="btn-icon"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="download-card">
+          <div class="download-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <div class="download-info">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">UI Design System</h5>
+              <div>
+                <span class="download-size">850 MB</span>
+                <span class="download-date">Apr 2, 2025</span>
+                <span class="completed-icon"><i class="fas fa-check"></i></span>
+              </div>
+            </div>
+            <div>
+              <span class="download-tag">Design</span>
+              <span class="download-tag">UI/UX</span>
+            </div>
+            <div class="download-progress mt-2">
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="download-actions">
+            <button class="btn-icon"><i class="fas fa-folder-open"></i></button>
+            <button class="btn-icon"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="download-card">
+          <div class="download-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="download-info">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">Machine Learning Dataset</h5>
+              <div>
+                <span class="download-size">3.5 GB</span>
+                <span class="download-date">Mar 28, 2025</span>
+                <span class="completed-icon"><i class="fas fa-check"></i></span>
+              </div>
+            </div>
+            <div>
+              <span class="download-tag">ML</span>
+              <span class="download-tag">Dataset</span>
+            </div>
+            <div class="download-progress mt-2">
+              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="download-actions">
+            <button class="btn-icon"><i class="fas fa-folder-open"></i></button>
+            <button class="btn-icon"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

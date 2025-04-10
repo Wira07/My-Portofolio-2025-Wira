@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Friends - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 500;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        transition: all 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .section-icon {
+        color: var(--accent-color);
+        margin-left: 10px;
+      }
+
+      .notification-icon {
+        position: relative;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-menu {
+        display: flex;
+      }
+
+      .nav-menu-item {
+        margin: 0 15px;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-menu-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .nav-menu-item.active {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .active-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+      /* Friends page specific styles */
+      .friend-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 15px;
+        text-align: center;
+        background-color: white;
+        height: 100%;
+      }
+
+      .friend-avatar-lg {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: 3px solid white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .friend-avatar-lg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .friend-status {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #28a745;
+        border: 2px solid white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .friend-status.offline {
+        background-color: #6c757d;
+      }
+
+      .friend-status.busy {
+        background-color: #dc3545;
+      }
+
+      .friend-status.away {
+        background-color: #ffc107;
+      }
+
+      .friend-name {
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      .friend-title {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .friend-stats {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .friend-stat {
+        padding: 0 15px;
+        text-align: center;
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .friend-stat:last-child {
+        border-right: none;
+      }
+
+      .stat-value {
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+
+      .stat-label {
+        font-size: 12px;
+        color: #6c757d;
+      }
+
+      .friend-action-btn {
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 5px;
+        transition: all 0.3s;
+      }
+
+      .friend-request {
+        background: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s;
+      }
+
+      .friend-request:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .friend-request-content {
+        flex-grow: 1;
+        margin-left: 15px;
+      }
+
+      .friend-request-actions {
+        display: flex;
+      }
+
+      .friend-request-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 8px;
+        transition: all 0.3s;
+      }
+
+      .friend-request-btn.accept {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .friend-request-btn.reject {
+        background-color: #f8f9fa;
+        color: #6c757d;
+      }
+
+      .friend-request-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .mutual-friend {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-right: -10px;
+      }
+
+      .filter-tabs {
+        display: flex;
+        margin-bottom: 25px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .filter-tab {
+        padding: 10px 20px;
+        border-radius: 30px;
+        margin-right: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        white-space: nowrap;
+        font-weight: 500;
+      }
+
+      .filter-tab.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+      }
+
+      .filter-tab:hover:not(.active) {
+        background-color: var(--hover-bg);
+      }
+
+      .friend-mutual-connections {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
+      .friend-interests {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+        justify-content: center;
+      }
+
+      .interest-badge {
+        background-color: var(--sidebar-bg);
+        color: var(--text-color);
+        font-size: 12px;
+        border-radius: 20px;
+        padding: 5px 12px;
+        margin: 3px;
+        transition: all 0.3s;
+      }
+
+      .interest-badge:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .invite-section {
+        background-color: var(--sidebar-bg);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+      }
+
+      .invite-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--active-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 30px;
+        margin: 0 auto 20px;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      .community-card {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .community-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 15px;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: white;
+      }
+
+      .community-icon.purple {
+        background: linear-gradient(45deg, #7038ff, #9747ff);
+      }
+
+      .community-icon.blue {
+        background: linear-gradient(45deg, #2962ff, #0747ff);
+      }
+
+      .community-icon.green {
+        background: linear-gradient(45deg, #00b09b, #06a77d);
+      }
+
+      .members-preview {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      .connect-dots {
+        position: relative;
+        width: 100%;
+        height: 40px;
+        margin: 10px 0;
+      }
+
+      .connect-dot {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        opacity: 0.7;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link active"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <div class="nav-menu">
+          <div class="nav-menu-item active"><span class="active-dot"></span>Network</div>
+          <div class="nav-menu-item">Colleagues</div>
+          <div class="nav-menu-item">Classmates</div>
+          <div class="nav-menu-item">Collaborators</div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search friends" />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Section -->
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Filter Tabs -->
+          <div class="filter-tabs">
+            <div class="filter-tab active">All Connections (24)</div>
+            <div class="filter-tab">Online Now (8)</div>
+            <div class="filter-tab">Recent Interactions (6)</div>
+            <div class="filter-tab">Suggested Connections</div>
+          </div>
+
+          <!-- Friends Grid -->
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Arman Maulana" />
+                    <div class="friend-status"></div>
+                  </div>
+                  <div class="friend-name">Arman Maulana</div>
+                  <div class="friend-title">Senior UI Designer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">12</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">83</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">UI/UX</div>
+                    <div class="interest-badge">Figma</div>
+                    <div class="interest-badge">Design</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Dina Sanjaya" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Dina Sanjaya</div>
+                  <div class="friend-title">Frontend Developer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">8</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">67</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.5</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">React</div>
+                    <div class="interest-badge">Vue</div>
+                    <div class="interest-badge">CSS</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Fadli Rahman" />
+                    <div class="friend-status busy"></div>
+                  </div>
+                  <div class="friend-name">Fadli Rahman</div>
+                  <div class="friend-title">Backend Developer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">15</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">92</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.9</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">Node.js</div>
+                    <div class="interest-badge">Java</div>
+                    <div class="interest-badge">API</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Anita Putri" />
+                    <div class="friend-status away"></div>
+                  </div>
+                  <div class="friend-name">Anita Putri</div>
+                  <div class="friend-title">Product Manager</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">22</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">118</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.7</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">Agile</div>
+                    <div class="interest-badge">Scrum</div>
+                    <div class="interest-badge">Strategy</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Budi Santoso" />
+                    <div class="friend-status"></div>
+                  </div>
+                  <div class="friend-name">Budi Santoso</div>
+                  <div class="friend-title">Data Scientist</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">7</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">64</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.6</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">Python</div>
+                    <div class="interest-badge">Machine Learning</div>
+                    <div class="interest-badge">AI</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Citra Dewi" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Citra Dewi</div>
+                  <div class="friend-title">DevOps Engineer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">11</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">79</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">AWS</div>
+                    <div class="interest-badge">Docker</div>
+                    <div class="interest-badge">CI/CD</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Citra Dewi" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Citra Dewi</div>
+                  <div class="friend-title">DevOps Engineer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">11</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">79</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">AWS</div>
+                    <div class="interest-badge">Docker</div>
+                    <div class="interest-badge">CI/CD</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Citra Dewi" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Citra Dewi</div>
+                  <div class="friend-title">DevOps Engineer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">11</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">79</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">AWS</div>
+                    <div class="interest-badge">Docker</div>
+                    <div class="interest-badge">CI/CD</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Citra Dewi" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Citra Dewi</div>
+                  <div class="friend-title">DevOps Engineer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">11</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">79</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">AWS</div>
+                    <div class="interest-badge">Docker</div>
+                    <div class="interest-badge">CI/CD</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Citra Dewi" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Citra Dewi</div>
+                  <div class="friend-title">DevOps Engineer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">11</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">79</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">AWS</div>
+                    <div class="interest-badge">Docker</div>
+                    <div class="interest-badge">CI/CD</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Citra Dewi" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Citra Dewi</div>
+                  <div class="friend-title">DevOps Engineer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">11</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">79</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">AWS</div>
+                    <div class="interest-badge">Docker</div>
+                    <div class="interest-badge">CI/CD</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="friend-card">
+                  <div class="friend-avatar-lg">
+                    <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="Citra Dewi" />
+                    <div class="friend-status offline"></div>
+                  </div>
+                  <div class="friend-name">Citra Dewi</div>
+                  <div class="friend-title">DevOps Engineer</div>
+                  <div class="friend-stats">
+                    <div class="friend-stat">
+                      <div class="stat-value">11</div>
+                      <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">79</div>
+                      <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="friend-stat">
+                      <div class="stat-value">4.8</div>
+                      <div class="stat-label">Rating</div>
+                    </div>
+                  </div>
+                  <div class="friend-interests">
+                    <div class="interest-badge">AWS</div>
+                    <div class="interest-badge">Docker</div>
+                    <div class="interest-badge">CI/CD</div>
+                  </div>
+                  <button class="btn btn-primary friend-action-btn"><i class="fas fa-comment me-2"></i> Message</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- See More Button -->
+          <div class="text-center my-4">
+            <button class="btn btn-primary px-4"><i class="fas fa-sync-alt me-2"></i> Load More Connections</button>
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-md-4">
+          <!-- Friend Requests Section -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="mb-3">Friend Requests <span class="badge bg-danger ms-2">3</span></h5>
+
+              <div class="friend-request">
+                <div class="friend-avatar">
+                  <img src="/api/placeholder/40/40" alt="Rizky Pratama" />
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-name">Rizky Pratama</div>
+                  <div class="small text-muted">Mobile Developer</div>
+                  <div class="friend-mutual-connections">
+                    <img src="/api/placeholder/25/25" alt="Mutual 1" class="mutual-friend" />
+                    <img src="/api/placeholder/25/25" alt="Mutual 2" class="mutual-friend" />
+                    <span class="small text-muted ms-2">2 mutual connections</span>
+                  </div>
+                </div>
+                <div class="friend-request-actions">
+                  <button class="friend-request-btn accept">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="friend-request-btn reject">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="friend-request">
+                <div class="friend-avatar">
+                  <img src="/api/placeholder/40/40" alt="Lia Mentari" />
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-name">Lia Mentari</div>
+                  <div class="small text-muted">UX Researcher</div>
+                  <div class="friend-mutual-connections">
+                    <img src="/api/placeholder/25/25" alt="Mutual 1" class="mutual-friend" />
+                    <img src="/api/placeholder/25/25" alt="Mutual 2" class="mutual-friend" />
+                    <img src="/api/placeholder/25/25" alt="Mutual 3" class="mutual-friend" />
+                    <span class="small text-muted ms-2">3 mutual connections</span>
+                  </div>
+                </div>
+                <div class="friend-request-actions">
+                  <button class="friend-request-btn accept">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="friend-request-btn reject">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="friend-request">
+                <div class="friend-avatar">
+                  <img src="/api/placeholder/40/40" alt="Danu Wijaya" />
+                </div>
+                <div class="friend-request-content">
+                  <div class="friend-name">Danu Wijaya</div>
+                  <div class="small text-muted">Full Stack Developer</div>
+                  <div class="friend-mutual-connections">
+                    <img src="/api/placeholder/25/25" alt="Mutual 1" class="mutual-friend" />
+                    <span class="small text-muted ms-2">1 mutual connection</span>
+                  </div>
+                </div>
+                <div class="friend-request-actions">
+                  <button class="friend-request-btn accept">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="friend-request-btn reject">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Communities -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="mb-4">Professional Communities</h5>
+
+              <div class="row g-3">
+                <div class="col-md-12">
+                  <div class="card h-100">
+                    <div class="community-card">
+                      <div class="community-icon purple">
+                        <i class="fas fa-laptop-code"></i>
+                      </div>
+                      <h6 class="mt-3">Frontend Masters</h6>
+                      <p class="small text-muted">1,243 members</p>
+                      <div class="members-preview mb-3">
+                        <img src="/api/placeholder/25/25" alt="Member 1" class="mutual-friend" />
+                        <img src="/api/placeholder/25/25" alt="Member 2" class="mutual-friend" />
+                        <img src="/api/placeholder/25/25" alt="Member 3" class="mutual-friend" />
+                        <div class="mutual-friend d-flex align-items-center justify-content-center bg-light">+8</div>
+                      </div>
+                      <button class="btn btn-sm btn-outline-primary w-100">Join Community</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="card h-100">
+                    <div class="community-card">
+                      <div class="community-icon blue">
+                        <i class="fas fa-database"></i>
+                      </div>
+                      <h6 class="mt-3">Data Nerds</h6>
+                      <p class="small text-muted">875 members</p>
+                      <button class="btn btn-sm btn-outline-primary w-100">Join</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="card h-100">
+                    <div class="community-card">
+                      <div class="community-icon green">
+                        <i class="fas fa-mobile-alt"></i>
+                      </div>
+                      <h6 class="mt-3">Mobile Devs</h6>
+                      <p class="small text-muted">642 members</p>
+                      <button class="btn btn-sm btn-outline-primary w-100">Join</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Invite Section -->
+          <div class="invite-section">
+            <div class="invite-icon">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <h5>Invite Colleagues</h5>
+            <p class="text-muted mb-4">Grow your professional network by inviting your colleagues to connect.</p>
+
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Enter email address" aria-label="Email address" />
+              <button class="btn btn-primary" type="button">Send</button>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+              <button class="btn btn-sm btn-outline-secondary me-2"><i class="fas fa-address-book me-1"></i> Import Contacts</button>
+              <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-share-alt me-1"></i> Share Link</button>
+            </div>
+
+            <!-- Connection dots animation -->
+            <div class="connect-dots">
+              <div class="connect-dot" style="top: 10px; left: 30%"></div>
+              <div class="connect-dot" style="top: 25px; left: 40%"></div>
+              <div class="connect-dot" style="top: 5px; left: 60%"></div>
+              <div class="connect-dot" style="top: 30px; left: 70%"></div>
+              <div class="connect-dot" style="top: 15px; left: 85%"></div>
+            </div>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="mt-4 text-center">
+            <a href="https://github.com/wirasukma" class="btn-icon me-2" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/wirasukma" class="btn-icon me-2" title="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://instagram.com/wirasukma" class="btn-icon me-2" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="mailto:wira.sukma@example.com" class="btn-icon" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Random positioning for the connection dots animation
+      document.addEventListener("DOMContentLoaded", function () {
+        const dots = document.querySelectorAll(".connect-dot");
+
+        // Animate dots with random movements
+        dots.forEach((dot) => {
+          // Random initial positions
+          const randomLeftPos = Math.random() * 90 + 5; // 5% to 95%
+          const randomTopPos = Math.random() * 30 + 5; // 5% to 35%
+
+          dot.style.left = `${randomLeftPos}%`;
+          dot.style.top = `${randomTopPos}px`;
+
+          // Add animation
+          setInterval(() => {
+            const newLeftPos = Math.random() * 90 + 5;
+            const newTopPos = Math.random() * 30 + 5;
+
+            dot.style.transition = "all 5s ease-in-out";
+            dot.style.left = `${newLeftPos}%`;
+            dot.style.top = `${newTopPos}px`;
+          }, 5000);
+        });
+      });
+    </script>
+  </body>
+</html>

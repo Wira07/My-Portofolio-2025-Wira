@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorites - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+        --secondary-accent: #ff5555;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-card {
+        height: 200px;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .feature-card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: white;
+      }
+
+      .card-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        z-index: 2;
+      }
+
+      .category-label {
+        font-size: 12px;
+        color: #6c757d;
+        margin-bottom: 5px;
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-menu {
+        display: flex;
+      }
+
+      .nav-menu-item {
+        margin: 0 15px;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-menu-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .nav-menu-item.active {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .notification-icon {
+        position: relative;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      /* Heart icon for favorites */
+      .heart-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 5;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+      }
+
+      .heart-icon:hover {
+        transform: scale(1.1);
+      }
+
+      .heart-icon i {
+        color: var(--secondary-accent);
+        font-size: 18px;
+        transition: all 0.3s;
+      }
+
+      .heart-icon:hover i {
+        transform: scale(1.2);
+      }
+
+      .featured-project {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        height: 350px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .featured-project-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .featured-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 30px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: white;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 5px 12px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        font-size: 12px;
+        margin-right: 8px;
+        margin-bottom: 8px;
+        backdrop-filter: blur(5px);
+      }
+
+      .favorite-collection {
+        margin-bottom: 50px;
+      }
+
+      .collection-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .collection-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+      }
+
+      .view-all {
+        color: var(--primary-color);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .view-all:hover {
+        transform: translateX(5px);
+      }
+
+      .view-all i {
+        margin-left: 8px;
+      }
+
+      .project-card {
+        border-radius: 15px;
+        overflow: hidden;
+        position: relative;
+        height: 220px;
+      }
+
+      .project-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .card:hover .project-image {
+        transform: scale(1.05);
+      }
+
+      .project-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: white;
+      }
+
+      .project-title {
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .project-category {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      .tech-icon {
+        width: 25px;
+        height: 25px;
+        background-color: white;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .tech-icon i {
+        font-size: 12px;
+        color: var(--primary-color);
+      }
+
+      .favorite-filters {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      .filter-item {
+        padding: 8px 20px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        border-radius: 30px;
+        background-color: var(--sidebar-bg);
+        color: var(--text-color);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .filter-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .filter-item.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .filter-item i {
+        margin-right: 8px;
+      }
+
+      .favorite-stats {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        flex: 1;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        background: var(--active-gradient);
+        color: white;
+        font-size: 24px;
+      }
+
+      .stat-number {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+
+      .stat-label {
+        color: #6c757d;
+        font-size: 14px;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .featured-project,
+      .favorite-stats,
+      .card {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .favorite-stats:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .favorite-stats:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .favorite-stats:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link active"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <div class="nav-menu">
+          <div class="nav-menu-item">New</div>
+          <div class="nav-menu-item">Portfolio</div>
+          <div class="nav-menu-item">Projects</div>
+          <div class="nav-menu-item">Skills</div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search favorites..." />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="mb-1">My Favorites</h2>
+          <p class="text-muted">Your most loved projects and resources</p>
+        </div>
+        <div>
+          <button class="btn btn-outline-primary me-2"><i class="fas fa-folder me-2"></i> New Collection</button>
+          <button class="btn btn-primary"><i class="fas fa-sort me-2"></i> Sort</button>
+        </div>
+      </div>
+
+      <!-- Favorites Stats -->
+      <div class="favorite-stats">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div>
+            <p class="stat-number">24</p>
+            <p class="stat-label">Favorite Projects</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-folder"></i>
+          </div>
+          <div>
+            <p class="stat-number">5</p>
+            <p class="stat-label">Collections</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <div>
+            <p class="stat-number">12</p>
+            <p class="stat-label">Technologies</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Favorite Filters -->
+      <div class="favorite-filters">
+        <div class="filter-item active"><i class="fas fa-border-all"></i> All Favorites</div>
+        <div class="filter-item"><i class="fas fa-code"></i> Code Projects</div>
+        <div class="filter-item"><i class="fas fa-mobile-alt"></i> Mobile Apps</div>
+        <div class="filter-item"><i class="fas fa-database"></i> Data Projects</div>
+        <div class="filter-item"><i class="fas fa-paint-brush"></i> UI/UX Design</div>
+      </div>
+
+      <!-- Featured Favorite Project -->
+      <div class="featured-project">
+        <img src="/api/placeholder/1200/600" alt="Featured Project" class="featured-project-image" />
+        <div class="heart-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div class="featured-overlay">
+          <span class="badge bg-primary mb-2">Featured Favorite</span>
+          <h3>E-Commerce Dashboard Analytics</h3>
+          <p class="mb-3">A comprehensive analytics dashboard for e-commerce platforms with real-time data visualization and advanced filtering capabilities.</p>
+          <div class="mb-3">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">D3.js</span>
+            <span class="tag">MongoDB</span>
+          </div>
+          <button class="btn btn-primary btn-sm me-2"><i class="fas fa-eye me-2"></i> View Project</button>
+          <button class="btn btn-outline-light btn-sm"><i class="fas fa-folder-plus me-2"></i> Add to Collection</button>
+        </div>
+      </div>
+
+      <!-- Web Development Collection -->
+      <div class="favorite-collection">
+        <div class="collection-header">
+          <div class="collection-title">Web Development</div>
+          <div class="view-all">View all <i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="row">
+          <!-- Project 1 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Project 1" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">Personal Portfolio CMS</div>
+                  <div class="project-category">Web, CMS</div>
+                  <div class="mt-2">
+                    <span class="tech-icon"><i class="fab fa-react"></i></span>
+                    <span class="tech-icon"><i class="fab fa-node-js"></i></span>
+                    <span class="tech-icon"><i class="fab fa-css3"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Project 2" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">E-commerce Platform</div>
+                  <div class="project-category">Web, E-commerce</div>
+                  <div class="mt-2">
+                    <span class="tech-icon"><i class="fab fa-vuejs"></i></span>
+                    <span class="tech-icon"><i class="fas fa-database"></i></span>
+                    <span class="tech-icon"><i class="fab fa-aws"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Project 3" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">Task Management App</div>
+                  <div class="project-category">Web, Productivity</div>
+                  <div class="mt-2">
+                    <span class="tech-icon"><i class="fab fa-angular"></i></span>
+                    <span class="tech-icon"><i class="fab fa-node-js"></i></span>
+                    <span class="tech-icon"><i class="fas fa-database"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Project 4" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">Social Media Dashboard</div>
+                  <div class="project-category">Web, Analytics</div>
+                  <div class="mt-2">
+                    <span class="tech-icon"><i class="fab fa-react"></i></span>
+                    <span class="tech-icon"><i class="fas fa-chart-bar"></i></span>
+                    <span class="tech-icon"><i class="fab fa-css3"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Development Collection -->
+      <div class="favorite-collection">
+        <div class="collection-header">
+          <div class="collection-title">Mobile Apps</div>
+          <div class="view-all">View all <i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="row">
+          <!-- Project 1 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Mobile Project 1" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">Fitness Tracker App</div>
+                  <div class="project-category">Mobile, Health</div>
+                  <div class="mt-2">
+                    <span class="tech-icon"><i class="fab fa-react"></i></span>
+                    <span class="tech-icon"><i class="fab fa-android"></i></span>
+                    <span class="tech-icon"><i class="fab fa-apple"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Mobile Project 2" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">Food Delivery App</div>
+                  <div class="project-category">Mobile, Service</div>
+                  <div class="mt-2">
+                    <span class="tech-icon"><i class="fab fa-flutter"></i></span>
+                    <span class="tech-icon"><i class="fas fa-map-marker-alt"></i></span>
+                    <span class="tech-icon"><i class="fas fa-database"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Mobile Project 3" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">Travel Planner</div>
+                  <div class="project-category">Mobile, Travel</div>
+                  <div class="mt-2">
+                    <span class="tech-icon"><i class="fab fa-swift"></i></span>
+                    <span class="tech-icon"><i class="fab fa-apple"></i></span>
+                    <span class="tech-icon"><i class="fas fa-cloud"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="col-md-3">
+            <div class="card">
+              <div class="project-card">
+                <img src="/api/placeholder/400/300" alt="Mobile Project 4" class="project-image" />
+                <div class="heart-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="project-overlay">
+                  <div class="project-title">Language Learning App</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

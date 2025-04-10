@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --success-gradient: linear-gradient(90deg, #20bf55, #01baef);
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("https://cdnjs.cloudflare.com/ajax/libs/img/blurred-code-bg.svg");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 119, 0, 0.8), rgba(67, 97, 238, 0.6));
+        z-index: -1;
+      }
+
+      .background-shapes {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .shape {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      .shape-1 {
+        width: 400px;
+        height: 400px;
+        top: -200px;
+        left: -100px;
+        animation: float 25s infinite alternate;
+      }
+
+      .shape-2 {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        right: -50px;
+        animation: float 18s infinite alternate-reverse;
+      }
+
+      .shape-3 {
+        width: 200px;
+        height: 200px;
+        top: 40%;
+        left: 10%;
+        animation: float 20s infinite alternate-reverse;
+      }
+
+      .shape-4 {
+        width: 150px;
+        height: 150px;
+        bottom: 20%;
+        left: 15%;
+        animation: float 22s infinite alternate;
+      }
+
+      .floating-code {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.1);
+        font-family: monospace;
+        font-size: 2rem;
+        pointer-events: none;
+        white-space: nowrap;
+        opacity: 0.6;
+      }
+
+      .code-1 {
+        top: 15%;
+        right: 5%;
+        animation: codeSlideReverse 30s linear infinite;
+      }
+
+      .code-2 {
+        top: 35%;
+        right: -5%;
+        animation: codeSlideReverse 35s linear infinite;
+        animation-delay: 5s;
+      }
+
+      .code-3 {
+        bottom: 25%;
+        right: 10%;
+        animation: codeSlideReverse 40s linear infinite;
+        animation-delay: 8s;
+      }
+
+      @keyframes codeSlideReverse {
+        0% {
+          transform: translateX(100vw);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .register-container {
+        width: 1000px;
+        max-width: 90%;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .register-sidebar {
+        width: 45%;
+        background: var(--active-gradient);
+        padding: 40px;
+        color: white;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+
+      .register-sidebar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: url("/api/placeholder/800/1200");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .register-content {
+        width: 55%;
+        padding: 50px;
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo-icon {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo-text {
+        font-weight: bold;
+        font-size: 22px;
+        letter-spacing: 0.5px;
+      }
+
+      .welcome-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      .welcome-heading {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .welcome-message {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+
+      .benefits {
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .benefit-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+      }
+
+      .register-form {
+        max-width: 450px;
+      }
+
+      .form-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: var(--text-color);
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #495057;
+      }
+
+      .input-group {
+        position: relative;
+        margin-bottom: 8px;
+      }
+
+      .form-control {
+        border: none;
+        border-bottom: 2px solid #dee2e6;
+        border-radius: 0;
+        padding: 10px 15px 10px 40px;
+        background-color: transparent;
+        transition: all 0.3s;
+      }
+
+      .form-control:focus {
+        outline: none;
+        box-shadow: none;
+        border-color: var(--primary-color);
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-size: 18px;
+        transition: all 0.3s;
+      }
+
+      .form-control:focus + .input-icon {
+        color: var(--primary-color);
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .password-toggle:hover {
+        color: var(--primary-color);
+      }
+
+      .password-requirements {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 10px;
+      }
+
+      .requirement {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      .requirement i {
+        margin-right: 5px;
+        font-size: 12px;
+      }
+
+      .requirement.valid {
+        color: #20bf55;
+      }
+
+      .requirement.invalid {
+        color: #dc3545;
+      }
+
+      .btn {
+        padding: 12px 25px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
+        width: 100%;
+        padding: 15px;
+        margin-top: 20px;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 30px 0;
+        color: #6c757d;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .divider::before {
+        margin-right: 10px;
+      }
+
+      .divider::after {
+        margin-left: 10px;
+      }
+
+      .social-register {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .social-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-google {
+        background-color: #db4437;
+      }
+
+      .btn-facebook {
+        background-color: #3b5998;
+      }
+
+      .btn-github {
+        background-color: #24292e;
+      }
+
+      .login-link {
+        text-align: center;
+        margin-top: 30px;
+        color: #6c757d;
+      }
+
+      .login-link a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .login-link a:hover {
+        color: var(--accent-color);
+      }
+
+      .success-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.5s ease;
+      }
+
+      .success-animation.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .checkmark-container {
+        width: 100px;
+        height: 100px;
+        position: relative;
+      }
+
+      .checkmark-circle {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background: var(--success-gradient);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: grow 0.5s ease-in-out forwards;
+        animation-delay: 0.3s;
+      }
+
+      .checkmark-check {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        color: white;
+        font-size: 50px;
+        animation: reveal 0.5s ease-in-out forwards;
+        animation-delay: 0.8s;
+      }
+
+      .progress-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        background: var(--active-gradient);
+        width: 0%;
+        animation: progress 3s linear forwards;
+        animation-delay: 1.3s;
+      }
+
+      .progress-step {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .progress-step::before {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 30px;
+        right: 30px;
+        height: 2px;
+        background-color: #dee2e6;
+        z-index: 1;
+      }
+
+      .step {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #dee2e6;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s;
+      }
+
+      .step.active {
+        background: var(--active-gradient);
+        color: white;
+      }
+
+      .step.completed {
+        background: var(--success-gradient);
+        color: white;
+      }
+
+      @keyframes grow {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes reveal {
+        from {
+          transform: translate(-50%, -50%) scale(0);
+        }
+        to {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      @keyframes progress {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+      }
+
+      .floating-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .fade-in-delay {
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      .fade-in-delay-1 {
+        animation-delay: 0.3s;
+      }
+
+      .fade-in-delay-2 {
+        animation-delay: 0.6s;
+      }
+
+      .fade-in-delay-3 {
+        animation-delay: 0.9s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 991px) {
+        .register-container {
+          flex-direction: column;
+          max-width: 95%;
+        }
+
+        .register-sidebar,
+        .register-content {
+          width: 100%;
+        }
+
+        .register-sidebar {
+          padding: 30px;
+        }
+
+        .benefits {
+          display: none;
+        }
+      }
+
+      .typing-animation::after {
+        content: "|";
+        animation: blink 1s infinite step-end;
+      }
+
+      @keyframes blink {
+        from,
+        to {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .input-animation {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .input-animation::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--active-gradient);
+        transition: width 0.5s ease;
+      }
+
+      .input-animation:focus-within::after {
+        width: 100%;
+      }
+
+      .register-btn-animation {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .register-btn-animation::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.6s;
+      }
+
+      .register-btn-animation:hover::before {
+        left: 100%;
+      }
+
+      .form-section {
+        display: none;
+        animation: fadeIn 0.5s;
+      }
+
+      .form-section.active {
+        display: block;
+      }
+
+      .form-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+
+      .btn-prev {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border: 1px solid #dee2e6;
+      }
+
+      .btn-prev:hover {
+        background-color: #e9ecef;
+        transform: translateY(-3px);
+      }
+
+      .password-strength {
+        height: 5px;
+        border-radius: 3px;
+        margin-top: 10px;
+        transition: all 0.3s;
+        background-color: #e9ecef;
+      }
+
+      .strength-weak {
+        width: 30%;
+        background-color: #dc3545;
+      }
+
+      .strength-medium {
+        width: 60%;
+        background-color: #ffc107;
+      }
+
+      .strength-strong {
+        width: 100%;
+        background-color: #20bf55;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Elements -->
+    <div class="background-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+
+    <div class="floating-code code-1">class Developer extends Professional {}</div>
+    <div class="floating-code code-2">const skills = ["Frontend", "Backend", "DevOps"];</div>
+    <div class="floating-code code-3">await Portfolio.createAccount(user);</div>
+
+    <!-- Register Container -->
+    <div class="register-container">
+      <!-- Sidebar Section -->
+      <div class="register-sidebar">
+        <div>
+          <div class="logo">
+            <div class="logo-icon"><i class="fas fa-code"></i></div>
+            <div class="logo-text">WiraSaputra</div>
+          </div>
+          <div class="welcome-text">
+            <h1 class="welcome-heading typing-animation">Bergabunglah Dengan Kami</h1>
+            <p class="welcome-message">Buat akun dan dapatkan akses ke portfolio profesional dan projek-projek terkini saya.</p>
+          </div>
+        </div>
+
+        <div class="benefits">
+          <div class="benefit-item fade-in-delay fade-in-delay-1">
+            <div class="benefit-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div>
+              <h5>Komunitas Developer</h5>
+              <p>Bergabung dengan komunitas developer profesional</p>
+            </div>
+          </div>
+
+          <div class="benefit-item fade-in-delay fade-in-delay-2">
+            <div class="benefit-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <div>
+              <h5>Pembelajaran Berkelanjutan</h5>
+              <p>Akses tutorial dan materi pembelajaran terbaru</p>
+            </div>
+          </div>
+
+          <div class="benefit-item fade-in-delay fade-in-delay-3">
+            <div class="benefit-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div>
+              <h5>Peluang Kolaborasi</h5>
+              <p>Temukan partner untuk mengembangkan proyek bersama</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Register Form Section -->
+      <div class="register-content">
+        <div class="register-form">
+          <h2 class="form-title">Buat Akun Baru</h2>
+
+          <div class="progress-step">
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
+          </div>
+
+          <form id="registerForm">
+            <!-- Form Section 1: Personal Info -->
+            <div class="form-section active" id="section1">
+              <div class="form-group">
+                <label class="form-label">Nama Lengkap</label>
+                <div class="input-group input-animation">
+                  <input type="text" class="form-control" id="fullname" placeholder="Masukkan nama lengkap" required />
+                  <i class="fas fa-user input-icon"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <div class="input-group input-animation">
+                  <input type="email" class="form-control" id="email" placeholder="nama@email.com" required />
+                  <i class="fas fa-envelope input-icon"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Nomor Telepon</label>
+                <div class="input-group input-animation">
+                  <input type="tel" class="form-control" id="phone" placeholder="08xxxxxxxxxx" />
+                  <i class="fas fa-phone input-icon"></i>
+                </div>
+              </div>
+
+              <div class="form-navigation">
+                <div></div>
+                <button type="button" class="btn btn-primary next-btn register-btn-animation" data-next="section2">Lanjutkan <i class="fas fa-arrow-right ms-2"></i></button>
+              </div>
+            </div>
+
+            <!-- Form Section 2: Account Security -->
+            <div class="form-section" id="section2">
+              <div class="form-group">
+                <label class="form-label">Username</label>
+                <div class="input-group input-animation">
+                  <input type="text" class="form-control" id="username" placeholder="Pilih username unik" required />
+                  <i class="fas fa-id-badge input-icon"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <div class="input-group input-animation">
+                  <input type="password" class="form-control" id="password" placeholder="Buat password" required />
+                  <i class="fas fa-lock input-icon"></i>
+                  <span class="password-toggle" id="togglePassword"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="password-strength" id="passwordStrength"></div>
+                <div class="password-requirements">
+                  <div class="requirement" id="req-length"><i class="fas fa-circle"></i> Minimal 8 karakter</div>
+                  <div class="requirement" id="req-uppercase"><i class="fas fa-circle"></i> Minimal 1 huruf besar</div>
+                  <div class="requirement" id="req-lowercase"><i class="fas fa-circle"></i> Minimal 1 huruf kecil</div>
+                  <div class="requirement" id="req-number"><i class="fas fa-circle"></i> Minimal 1 angka</div>
+                  <div class="requirement" id="req-special"><i class="fas fa-circle"></i> Minimal 1 karakter spesial</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Konfirmasi Password</label>
+                <div class="input-group input-animation">
+                  <input type="password" class="form-control" id="confirmPassword" placeholder="Konfirmasi password" required />
+                  <i class="fas fa-lock input-icon"></i>
+                  <span class="password-toggle" id="toggleConfirmPassword"><i class="fas fa-eye"></i></span>
+                </div>
+              </div>
+
+              <div class="form-navigation">
+                <button type="button" class="btn btn-prev" data-prev="section1"><i class="fas fa-arrow-left me-2"></i> Kembali</button>
+                <button type="button" class="btn btn-primary next-btn register-btn-animation" data-next="section3">Lanjutkan <i class="fas fa-arrow-right ms-2"></i></button>
+              </div>
+            </div>
+
+            <!-- Form Section 3: Preferences & Terms -->
+            <div class="form-section" id="section3">
+              <div class="form-group">
+                <label class="form-label">Bidang Keahlian</label>
+                <div class="input-group input-animation">
+                  <select class="form-control" id="expertise">
+                    <option value="" selected disabled>Pilih bidang keahlian</option>
+                    <option value="frontend">Frontend Developer</option>
+                    <option value="backend">Backend Developer</option>
+                    <option value="fullstack">Fullstack Developer</option>
+                    <option value="mobile">Mobile Developer</option>
+                    <option value="ui-ux">UI/UX Designer</option>
+                    <option value="data">Data Scientist</option>
+                    <option value="other">Lainnya</option>
+                  </select>
+                  <i class="fas fa-laptop-code input-icon"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Bagaimana Anda menemukan kami?</label>
+                <div class="input-group input-animation">
+                  <select class="form-control" id="referral">
+                    <option value="" selected disabled>Pilih sumber referensi</option>
+                    <option value="search">Mesin Pencari</option>
+                    <option value="social">Media Sosial</option>
+                    <option value="friend">Rekomendasi Teman</option>
+                    <option value="event">Acara/Seminar</option>
+                    <option value="other">Lainnya</option>
+                  </select>
+                  <i class="fas fa-search-location input-icon"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-check mb-4">
+                  <input type="checkbox" class="form-check-input" id="terms" required />
+                  <label class="form-check-label" for="terms"> Saya menyetujui <a href="#" class="text-primary">Syarat & Ketentuan</a> dan <a href="#" class="text-primary">Kebijakan Privasi</a> </label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="newsletter" />
+                  <label class="form-check-label" for="newsletter"> Saya ingin menerima newsletter dan update terbaru </label>
+                </div>
+              </div>
+
+              <div class="form-navigation">
+                <button type="button" class="btn btn-prev" data-prev="section2"><i class="fas fa-arrow-left me-2"></i> Kembali</button>
+                <button type="submit" class="btn btn-primary register-btn-animation">Daftar Sekarang <i class="fas fa-user-plus ms-2"></i></button>
+              </div>
+            </div>
+          </form>
+
+          <div class="divider">atau daftar dengan</div>
+
+          <div class="social-register">
+            <a href="#" class="social-btn btn-google">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-btn btn-facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-btn btn-github">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+
+          <div class="login-link">Sudah memiliki akun? <a href="login.html">Login</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Animation -->
+    <div class="success-animation" id="successAnimation">
+      <div class="text-center">
+        <div class="checkmark-container">
+          <div class="checkmark-circle"></div>
+          <i class="fas fa-check checkmark-check"></i>
+        </div>
+        <h3 class="mt-4">Pendaftaran Berhasil!</h3>
+        <p>Akun anda telah dibuat. Mengarahkan ke halaman login...</p>
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Elements
+      const registerForm = document.getElementById("registerForm");
+      const successAnimation = document.getElementById("successAnimation");
+      const passwordInput = document.getElementById("password");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+      const togglePassword = document.getElementById("togglePassword");
+      const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+      const passwordStrength = document.getElementById("passwordStrength");
+      const nextButtons = document.querySelectorAll(".next-btn");
+      const prevButtons = document.querySelectorAll(".btn-prev");
+      const formSections = document.querySelectorAll(".form-section");
+      const steps = document.querySelectorAll(".step");
+
+      // Typing animation
+      const typingElement = document.querySelector(".typing-animation");
+
+      // Function to simulate typing
+      function typeText(el, text, i = 0) {
+        if (i === 0) {
+          el.textContent = "";
+        }
+
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          setTimeout(() => typeText(el, text, i + 1), 80);
+        }
+      }
+
+      // Start typing after page loads
+      window.addEventListener("load", () => {
+        typingElement.classList.remove("typing-animation");
+        setTimeout(() => {
+          const textToType = "Bergabunglah Dengan Kami";
+          typeText(typingElement, textToType);
+          setTimeout(() => {
+            typingElement.classList.add("typing-animation");
+          }, textToType.length * 80 + 500);
+        }, 500);
+      });
+
+      // Password toggle visibility
+      togglePassword.addEventListener("click", function () {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+        this.querySelector("i").classList.toggle("fa-eye");
+        this.querySelector("i").classList.toggle("fa-eye-slash");
+      });
+
+      toggleConfirmPassword.addEventListener("click", function () {
+        const type = confirmPasswordInput.getAttribute("type") === "password" ? "text" : "password";
+        confirmPasswordInput.setAttribute("type", type);
+        this.querySelector("i").classList.toggle("fa-eye");
+        this.querySelector("i").classList.toggle("fa-eye-slash");
+      });
+
+      // Password strength checker
+      passwordInput.addEventListener("input", function () {
+        const password = this.value;
+        const requirements = {
+          length: password.length >= 8,
+          uppercase: /[A-Z]/.test(password),
+          lowercase: /[a-z]/.test(password),
+          number: /[0-9]/.test(password),
+          special: /[^A-Za-z0-9]/.test(password),
+        };
+
+        // Update requirement indicators
+        for (const [key, valid] of Object.entries(requirements)) {
+          const reqElement = document.getElementById(`req-${key}`);
+          reqElement.classList.toggle("valid", valid);
+          reqElement.classList.toggle("invalid", !valid);
+          reqElement.querySelector("i").className = valid ? "fas fa-check" : "fas fa-circle";
+        }
+
+        // Calculate strength score (0-5)
+        const score = Object.values(requirements).filter(Boolean).length;
+
+        // Update strength bar
+        passwordStrength.className = "password-strength";
+        if (password === "") {
+          passwordStrength.classList.add("");
+        } else if (score <= 2) {
+          passwordStrength.classList.add("strength-weak");
+        } else if (score <= 4) {
+          passwordStrength.classList.add("strength-medium");
+        } else {
+          passwordStrength.classList.add("strength-strong");
+        }
+      });
+
+      // Multi-step form navigation
+      nextButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const currentSection = this.closest(".form-section");
+          const nextSectionId = this.getAttribute("data-next");
+          const nextSection = document.getElementById(nextSectionId);
+
+          // Basic validation before proceeding
+          const inputs = currentSection.querySelectorAll("input[required]");
+          let isValid = true;
+
+          inputs.forEach((input) => {
+            if (!input.value) {
+              isValid = false;
+              input.classList.add("is-invalid");
+            } else {
+              input.classList.remove("is-invalid");
+            }
+          });
+
+          // Special validation for password confirmation
+          if (currentSection.id === "section2" && passwordInput.value !== confirmPasswordInput.value) {
+            isValid = false;
+            confirmPasswordInput.classList.add("is-invalid");
+            alert("Password dan konfirmasi password harus sama");
+          }
+
+          if (isValid) {
+            // Update active section
+            formSections.forEach((section) => section.classList.remove("active"));
+            nextSection.classList.add("active");
+
+            // Update progress steps
+            const currentStepNum = parseInt(currentSection.id.replace("section", ""));
+            const nextStepNum = parseInt(nextSectionId.replace("section", ""));
+
+            steps[currentStepNum - 1].classList.remove("active");
+            steps[currentStepNum - 1].classList.add("completed");
+            steps[nextStepNum - 1].classList.add("active");
+
+            // Scroll to top of form when switching sections
+            document.querySelector(".register-content").scrollTop = 0;
+          }
+        });
+      });
+
+      prevButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const currentSection = this.closest(".form-section");
+          const prevSectionId = this.getAttribute("data-prev");
+          const prevSection = document.getElementById(prevSectionId);
+
+          // Update active section
+          formSections.forEach((section) => section.classList.remove("active"));
+          prevSection.classList.add("active");
+
+          // Update progress steps
+          const currentStepNum = parseInt(currentSection.id.replace("section", ""));
+          const prevStepNum = parseInt(prevSectionId.replace("section", ""));
+
+          steps[currentStepNum - 1].classList.remove("active");
+          steps[prevStepNum - 1].classList.remove("completed");
+          steps[prevStepNum - 1].classList.add("active");
+
+          // Scroll to top of form when switching sections
+          document.querySelector(".register-content").scrollTop = 0;
+        });
+      });
+
+      // Handle register submission
+      registerForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Validate final section
+        const termsCheckbox = document.getElementById("terms");
+        if (!termsCheckbox.checked) {
+          alert("Anda harus menyetujui syarat dan ketentuan untuk melanjutkan");
+          return;
+        }
+
+        // Show loading on button
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+        submitBtn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+          // Show success animation
+          successAnimation.classList.add("show");
+
+          // Redirect after animation completes
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 3500);
+        }, 1500);
+      });
+
+      // Animation for input fields
+      const inputFields = document.querySelectorAll(".form-control");
+      inputFields.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.classList.add("active");
+        });
+
+        input.addEventListener("blur", function () {
+          if (this.value === "") {
+            this.parentElement.classList.remove("active");
+          }
+        });
+      });
+
+      // Create floating code elements dynamically
+      function createFloatingCode() {
+        const codeLines = [
+          "import { useState, useEffect } from 'react';",
+          "function Portfolio() { return <App />; }",
+          "const user = registerUser(formData);",
+          "document.addEventListener('DOMContentLoaded', init);",
+          "function createAccount() { /* logic */ }",
+        ];
+
+        for (let i = 0; i < 5; i++) {
+          const code = document.createElement("div");
+          code.className = "floating-code";
+          code.textContent = codeLines[i % codeLines.length];
+          code.style.top = `${10 + Math.random() * 80}%`;
+          code.style.right = `${-20 - Math.random() * 20}%`;
+          code.style.animationDuration = `${25 + Math.random() * 20}s`;
+          code.style.animationDelay = `${Math.random() * 5}s`;
+          document.querySelector(".background-shapes").appendChild(code);
+        }
+      }
+
+      // Uncomment to create more floating code elements
+      // createFloatingCode();
+    </script>
+  </body>
+</html>

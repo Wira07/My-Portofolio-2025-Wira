@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+        --secondary-accent: #7209b7;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background-image: radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.03) 0%, rgba(255, 119, 0, 0.03) 90%);
+      }
+
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(5px);
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+      }
+
+      .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .nav-menu-item {
+        margin: 5px 8px;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-menu-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .nav-menu-item.active {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+        outline: none;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .notification-icon {
+        position: relative;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--sidebar-bg);
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+
+      .notification-icon:hover {
+        background-color: var(--hover-bg);
+        transform: scale(1.1);
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+        padding-left: 15px;
+      }
+
+      .section-title::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: var(--accent-color);
+        border-radius: 4px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 15px;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .section-icon {
+        color: var(--accent-color);
+        margin-left: 10px;
+      }
+
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+      /* Timeline Styles */
+      .timeline {
+        position: relative;
+        padding: 20px 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(67, 97, 238, 0.3);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 40px;
+      }
+
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .timeline-content {
+        position: relative;
+        width: 45%;
+        padding: 25px;
+        border-radius: 15px;
+        background-color: white;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+        border-top: 4px solid var(--primary-color);
+      }
+
+      .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content {
+        left: 0;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content {
+        left: 55%;
+      }
+
+      .timeline-date {
+        position: absolute;
+        top: 20px;
+        background: var(--active-gradient);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 14px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.3);
+        z-index: 1;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-date {
+        right: -85px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-date {
+        left: -85px;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        box-shadow: 0 0 0 6px rgba(255, 119, 0, 0.2), 0 0 15px rgba(255, 119, 0, 0.4);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 119, 0, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(255, 119, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 119, 0, 0);
+        }
+      }
+
+      .timeline-dot::before {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background-color: white;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .timeline-title {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .timeline-subtitle {
+        color: var(--accent-color);
+        font-size: 14px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+
+      .timeline-subtitle::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .timeline-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+        border: 3px solid white;
+      }
+
+      .timeline-content:hover .timeline-image {
+        transform: scale(1.03);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .timeline-tag {
+        display: inline-block;
+        background-color: #e9ecef;
+        color: #495057;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        transition: all 0.3s;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      .timeline-tag:hover {
+        background-color: rgba(67, 97, 238, 0.1);
+        color: var(--primary-color);
+        transform: translateY(-2px);
+      }
+
+      .timeline-more {
+        color: var(--primary-color);
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        margin-top: 15px;
+        transition: all 0.3s;
+        padding: 8px 12px;
+        border-radius: 20px;
+        background-color: rgba(67, 97, 238, 0.05);
+      }
+
+      .timeline-more i {
+        margin-left: 5px;
+        transition: all 0.3s;
+      }
+
+      .timeline-more:hover {
+        color: var(--accent-color);
+        background-color: rgba(67, 97, 238, 0.1);
+      }
+
+      .timeline-more:hover i {
+        transform: translateX(5px);
+      }
+
+      .active-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      /* Filters */
+      .history-filters {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .filter-btn {
+        background-color: var(--sidebar-bg);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        color: var(--text-color);
+        font-weight: 500;
+        transition: all 0.3s;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        border-bottom: 2px solid transparent;
+      }
+
+      .filter-btn:hover {
+        background-color: var(--hover-bg);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .filter-btn.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      /* Header */
+      .history-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(45deg, rgba(67, 97, 238, 0.05), rgba(255, 119, 0, 0.05));
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+        border-left: 4px solid var(--primary-color);
+        border-right: 4px solid var(--accent-color);
+      }
+
+      .history-header::before {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(67, 97, 238, 0.1), transparent);
+        border-radius: 50%;
+        top: -100px;
+        left: -100px;
+      }
+
+      .history-header::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(255, 119, 0, 0.1), transparent);
+        border-radius: 50%;
+        bottom: -100px;
+        right: -100px;
+      }
+
+      .history-title {
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .history-title::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .history-subtitle {
+        max-width: 700px;
+        margin: 0 auto;
+        color: #6c757d;
+      }
+
+      /* Social Media */
+      .social-media-section {
+        margin-top: 50px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        text-align: center;
+      }
+
+      .social-title {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+      }
+
+      .btn-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: var(--sidebar-bg);
+        color: var(--text-color);
+        margin: 0 10px;
+        text-decoration: none;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .btn-icon:hover {
+        transform: translateY(-5px);
+      }
+
+      .btn-icon.github:hover {
+        background-color: #333;
+        color: white;
+      }
+
+      .btn-icon.linkedin:hover {
+        background-color: #0077b5;
+        color: white;
+      }
+
+      .btn-icon.instagram:hover {
+        background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        color: white;
+      }
+
+      .btn-icon.email:hover {
+        background-color: #ea4335;
+        color: white;
+      }
+
+      /* Decorative elements */
+      .decorator {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        z-index: -1;
+        opacity: 0.3;
+      }
+
+      .decorator-1 {
+        width: 300px;
+        height: 300px;
+        background-color: rgba(67, 97, 238, 0.3);
+        top: 20%;
+        right: -150px;
+      }
+
+      .decorator-2 {
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 119, 0, 0.3);
+        bottom: 30%;
+        left: -100px;
+      }
+
+      /* Stats counter section */
+      .stats-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 40px 0;
+        gap: 20px;
+      }
+
+      .stat-item {
+        flex: 1;
+        min-width: 150px;
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+        border-bottom: 3px solid var(--primary-color);
+      }
+
+      .stat-item:nth-child(2) {
+        border-bottom-color: var(--accent-color);
+      }
+
+      .stat-item:nth-child(3) {
+        border-bottom-color: var(--secondary-accent);
+      }
+
+      .stat-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 5px;
+      }
+
+      .stat-item:nth-child(2) .stat-number {
+        color: var(--accent-color);
+      }
+
+      .stat-item:nth-child(3) .stat-number {
+        color: var(--secondary-accent);
+      }
+
+      .stat-label {
+        color: #6c757d;
+        font-weight: 500;
+      }
+
+      .stat-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        background: var(--sidebar-bg);
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+      }
+
+      /* Quote section */
+      .quote-section {
+        background-color: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 40px 0;
+        position: relative;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .quote-text {
+        font-style: italic;
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .quote-text::before {
+        content: ""; /* atau gunakan "”" jika ingin kutipan penutup */
+        position: absolute;
+        left: 0;
+        top: -10px;
+        font-size: 3rem;
+        color: var(--accent-color);
+        opacity: 0.2;
+      }
+
+      .quote-author {
+        font-weight: 600;
+        color: var(--primary-color);
+        text-align: right;
+      }
+
+      /* Back to top button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--active-gradient);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        transition: all 0.3s;
+        opacity: 0;
+        z-index: 999;
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .timeline-item {
+        opacity: 0;
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .timeline-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .timeline-item:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .timeline-item:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .timeline-item:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .timeline-item:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .timeline-item:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+      .timeline-item:nth-child(7) {
+        animation-delay: 0.7s;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+
+      /* Mobile menu button */
+      .mobile-menu-btn {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        background: var(--active-gradient);
+        border-radius: 10px;
+        color: white;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1001;
+        box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+      }
+
+      /* Responsive */
+      @media (max-width: 991px) {
+        .timeline::before {
+          left: 30px;
+        }
+
+        .timeline-content {
+          width: calc(100% - 90px);
+          left: 90px !important;
+        }
+
+        .timeline-date {
+          left: -60px !important;
+          top: -30px !important;
+        }
+
+        .timeline-dot {
+          left: 30px;
+        }
+
+        .stats-section {
+          flex-direction: column;
+        }
+
+        .stat-item {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .main-content {
+          margin-left: 0;
+          padding: 15px;
+        }
+
+        .sidebar {
+          transform: translateX(-100%);
+          z-index: 1002;
+        }
+
+        .sidebar.active {
+          transform: translateX(0);
+        }
+
+        .mobile-menu-btn {
+          display: flex;
+        }
+
+        .nav-top {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .nav-menu {
+          order: 2;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .d-flex.align-items-center {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .search-container {
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 15px;
+        }
+
+        .search-container input {
+          width: 100%;
+        }
+
+        .history-filters {
+          overflow-x: auto;
+          padding-bottom: 10px;
+          justify-content: flex-start;
+        }
+      }
+
+      /* Overlay for mobile */
+      .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        display: none;
+      }
+
+      .sidebar-overlay.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile menu button -->
+    <div class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Sidebar overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link active"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Decorative elements -->
+      <div class="decorator decorator-1"></div>
+      <div class="decorator decorator-2"></div>
+
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <div class="nav-menu">
+          <div class="nav-menu-item"><span class="active-dot"></span>Career</div>
+          <div class="nav-menu-item active">Projects</div>
+          <div class="nav-menu-item">Education</div>
+          <div class="nav-menu-item">Achievements</div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search history..." />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+          </div>
+        </div>
+      </div>
+
+      <!-- History Header -->
+      <div class="history-header">
+        <h2 class="history-title">My Journey & Evolution</h2>
+        <p class="history-subtitle">Explore my professional timeline and development projects over the years. From early beginnings to the latest innovations - tracking my growth as a developer and creative technologist.</p>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="stats-section">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-code" style="color: var(--primary-color)"></i>
+          </div>
+          <div class="stat-number">27</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-briefcase" style="color: var(--accent-color)"></i>
+          </div>
+          <div class="stat-number">6</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-trophy" style="color: var(--secondary-accent)"></i>
+          </div>
+          <div class="stat-number">12</div>
+          <div class="stat-label">Awards Received</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="history-filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Work Experience</button>
+        <button class="filter-btn">Projects</button>
+        <button class="filter-btn">Education</button>
+        <button class="filter-btn">Awards</button>
+      </div>
+
+      <!-- Quote Section -->
+      <div class="quote-section">
+        <p class="quote-text">The technology you use impresses no one. The experience you create with it is everything.</p>
+        <div class="quote-author">— My Development Philosophy</div>
+      </div>
+
+      <!-- Timeline Section -->
+      <div class="section-title">Professional Timeline <i class="fas fa-clock section-icon"></i></div>
+
+      <div class="timeline">
+        <!-- 2023 Project -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-dot"></div>
+            <h4 class="timeline-title">Data Dashboard Project</h4>
+            <div class="timeline-subtitle">Analytics Platform Development</div>
+            <img src="/api/placeholder/600/300" class="timeline-image" alt="Data Dashboard Project" />
+            <p>Created an interactive analytics dashboard for visualizing business metrics and KPIs. Implemented real-time data processing and advanced filtering capabilities.</p>
+            <div class="mt-2 mb-2">
+              <span class="timeline-tag">React</span>
+              <span class="timeline-tag">D3.js</span>
+              <span class="timeline-tag">Node.js</span>
+              <span class="timeline-tag">MongoDB</span>
+            </div>
+            <a href="#" class="timeline-more">View project details <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- 2023 Work -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-dot"></div>
+            <h4 class="timeline-title">Senior Developer</h4>
+            <div class="timeline-subtitle">TechNova Solutions</div>
+            <img src="/api/placeholder/600/300" class="timeline-image" alt="TechNova Office" />
+            <p>Led a team of 5 developers working on enterprise SaaS products. Introduced modern development practices and improved deployment processes, reducing release cycle by 40%.</p>
+            <div class="mt-2 mb-2">
+              <span class="timeline-tag">Team Leadership</span>
+              <span class="timeline-tag">DevOps</span>
+              <span class="timeline-tag">Architecture</span>
+            </div>
+            <a href="#" class="timeline-more">See position details <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- 2022 Project -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2022</div>
+            <div class="timeline-dot"></div>
+            <h4 class="timeline-title">E-Commerce Mobile App</h4>
+            <div class="timeline-subtitle">Cross-Platform Development</div>
+            <img src="/api/placeholder/600/300" class="timeline-image" alt="E-Commerce App" />
+            <p>Built a feature-rich e-commerce application for iOS and Android. Implemented secure payment processing, product recommendations, and user authentication systems.</p>
+            <div class="mt-2 mb-2">
+              <span class="timeline-tag">React Native</span>
+              <span class="timeline-tag">Firebase</span>
+              <span class="timeline-tag">Stripe API</span>
+            </div>
+            <a href="#" class="timeline-more">View project details <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- 2021 Education -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2021</div>
+            <div class="timeline-dot"></div>
+            <h4 class="timeline-title">Advanced Cloud Certification</h4>
+            <div class="timeline-subtitle">AWS Solutions Architect</div>
+            <img src="/api/placeholder/600/300" class="timeline-image" alt="AWS Certification" />
+            <p>Completed advanced training in cloud architecture and infrastructure design. Certified in designing distributed systems and implementing scalable solutions on AWS.</p>
+            <div class="mt-2 mb-2">
+              <span class="timeline-tag">AWS</span>
+              <span class="timeline-tag">Cloud Architecture</span>
+              <span class="timeline-tag">Serverless</span>
+            </div>
+            <a href="#" class="timeline-more">View certification <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- 2020 Work -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2020</div>
+            <div class="timeline-dot"></div>
+            <h4 class="timeline-title">Full Stack Developer</h4>
+            <div class="timeline-subtitle">Digi Solutions</div>
+            <img src="/api/placeholder/600/300" class="timeline-image" alt="Digi Solutions Office" />
+            <p>Developed end-to-end web applications for clients across various industries. Implemented responsive designs and optimized application performance for large-scale use.</p>
+            <div class="mt-2 mb-2">
+              <span class="timeline-tag">JavaScript</span>
+              <span class="timeline-tag">Vue.js</span>
+              <span class="timeline-tag">Python</span>
+              <span class="timeline-tag">PostgreSQL</span>
+            </div>
+            <a href="#" class="timeline-more">See position details <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- 2019 Award -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2019</div>
+            <div class="timeline-dot"></div>
+            <h4 class="timeline-title">Developer of the Year</h4>
+            <div class="timeline-subtitle">Regional Tech Awards</div>
+            <img src="/api/placeholder/600/300" class="timeline-image" alt="Award Ceremony" />
+            <p>Received recognition for outstanding contributions to open-source projects and innovative application development in the regional tech community.</p>
+            <div class="mt-2 mb-2">
+              <span class="timeline-tag">Innovation</span>
+              <span class="timeline-tag">Open Source</span>
+              <span class="timeline-tag">Community</span>
+            </div>
+            <a href="#" class="timeline-more">View award details <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- 2018 Education -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-date">2018</div>
+            <div class="timeline-dot"></div>
+            <h4 class="timeline-title">Bachelor of Computer Science</h4>
+            <div class="timeline-subtitle">National University of Technology</div>
+            <img src="/api/placeholder/600/300" class="timeline-image" alt="University Campus" />
+            <p>Graduated with honors, specializing in software engineering and data structures. Completed thesis on efficient algorithms for real-time data processing in mobile environments.</p>
+            <div class="mt-2 mb-2">
+              <span class="timeline-tag">Computer Science</span>
+              <span class="timeline-tag">Software Engineering</span>
+              <span class="timeline-tag">Data Structures</span>
+            </div>
+            <a href="#" class="timeline-more">View education details <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Media Section -->
+      <div class="social-media-section">
+        <h4 class="social-title">Connect with me</h4>
+        <a href="https://github.com/wirasukma" class="btn-icon github" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/wirasukma" class="btn-icon linkedin" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://instagram.com/wirasukma" class="btn-icon instagram" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="mailto:wira.sukma@example.com" class="btn-icon email" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Filter buttons
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const sidebar = document.getElementById("sidebar");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+        if (mobileMenuBtn) {
+          mobileMenuBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("active");
+            sidebarOverlay.classList.toggle("active");
+          });
+        }
+
+        if (sidebarOverlay) {
+          sidebarOverlay.addEventListener("click", function () {
+            sidebar.classList.remove("active");
+            sidebarOverlay.classList.remove("active");
+          });
+        }
+
+        // Back to top button
+        const backToTopBtn = document.getElementById("backToTop");
+        if (backToTopBtn) {
+          window.addEventListener("scroll", function () {
+            if (window.pageYOffset > 300) {
+              backToTopBtn.classList.add("visible");
+            } else {
+              backToTopBtn.classList.remove("visible");
+            }
+          });
+
+          backToTopBtn.addEventListener("click", function () {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          });
+        }
+
+        // Animation on scroll
+        const animateOnScroll = function () {
+          const timelineItems = document.querySelectorAll(".timeline-item");
+          timelineItems.forEach((item) => {
+            const itemPosition = item.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+
+            if (itemPosition < screenPosition) {
+              item.style.opacity = "1";
+            }
+          });
+        };
+
+        // Initial check on load
+        animateOnScroll();
+
+        // Check on scroll
+        window.addEventListener("scroll", animateOnScroll);
+      });
+    </script>
+  </body>
+</html>

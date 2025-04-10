@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --success-gradient: linear-gradient(90deg, #20bf55, #01baef);
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("https://cdnjs.cloudflare.com/ajax/libs/img/blurred-code-bg.svg");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(67, 97, 238, 0.8), rgba(255, 119, 0, 0.6));
+        z-index: -1;
+      }
+
+      .background-shapes {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .shape {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      .shape-1 {
+        width: 400px;
+        height: 400px;
+        top: -200px;
+        right: -100px;
+        animation: float 25s infinite alternate;
+      }
+
+      .shape-2 {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        left: -50px;
+        animation: float 18s infinite alternate-reverse;
+      }
+
+      .shape-3 {
+        width: 200px;
+        height: 200px;
+        top: 40%;
+        right: 10%;
+        animation: float 20s infinite alternate-reverse;
+      }
+
+      .shape-4 {
+        width: 150px;
+        height: 150px;
+        bottom: 20%;
+        right: 15%;
+        animation: float 22s infinite alternate;
+      }
+
+      .floating-code {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.1);
+        font-family: monospace;
+        font-size: 2rem;
+        pointer-events: none;
+        white-space: nowrap;
+        opacity: 0.6;
+      }
+
+      .code-1 {
+        top: 15%;
+        left: 5%;
+        animation: codeSlide 30s linear infinite;
+      }
+
+      .code-2 {
+        top: 35%;
+        left: -5%;
+        animation: codeSlide 35s linear infinite;
+        animation-delay: 5s;
+      }
+
+      .code-3 {
+        bottom: 25%;
+        left: 10%;
+        animation: codeSlide 40s linear infinite;
+        animation-delay: 8s;
+      }
+
+      @keyframes codeSlide {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100vw);
+        }
+      }
+
+      .login-container {
+        width: 1000px;
+        max-width: 90%;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .login-sidebar {
+        width: 45%;
+        background: var(--active-gradient);
+        padding: 40px;
+        color: white;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+
+      .login-sidebar::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: url("/api/placeholder/800/1200");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .login-content {
+        width: 55%;
+        padding: 50px;
+        position: relative;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo-icon {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo-text {
+        font-weight: bold;
+        font-size: 22px;
+        letter-spacing: 0.5px;
+      }
+
+      .welcome-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      .welcome-heading {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .welcome-message {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+
+      .features {
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .feature-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+      }
+
+      .login-form {
+        max-width: 400px;
+      }
+
+      .form-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: var(--text-color);
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #495057;
+      }
+
+      .input-group {
+        position: relative;
+        margin-bottom: 8px;
+      }
+
+      .form-control {
+        border: none;
+        border-bottom: 2px solid #dee2e6;
+        border-radius: 0;
+        padding: 10px 15px 10px 40px;
+        background-color: transparent;
+        transition: all 0.3s;
+      }
+
+      .form-control:focus {
+        outline: none;
+        box-shadow: none;
+        border-color: var(--primary-color);
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-size: 18px;
+        transition: all 0.3s;
+      }
+
+      .form-control:focus + .input-icon {
+        color: var(--primary-color);
+      }
+
+      .forgot-password {
+        display: block;
+        text-align: right;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .forgot-password:hover {
+        color: var(--accent-color);
+        transform: translateX(3px);
+      }
+
+      .btn {
+        padding: 12px 25px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: var(--active-gradient);
+        border: none;
+        width: 100%;
+        padding: 15px;
+        margin-top: 20px;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 30px 0;
+        color: #6c757d;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .divider::before {
+        margin-right: 10px;
+      }
+
+      .divider::after {
+        margin-left: 10px;
+      }
+
+      .social-login {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .social-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-google {
+        background-color: #db4437;
+      }
+
+      .btn-facebook {
+        background-color: #3b5998;
+      }
+
+      .btn-github {
+        background-color: #24292e;
+      }
+
+      .create-account {
+        text-align: center;
+        margin-top: 30px;
+        color: #6c757d;
+      }
+
+      .create-account a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .create-account a:hover {
+        color: var(--accent-color);
+      }
+
+      .success-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.5s ease;
+      }
+
+      .success-animation.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .checkmark-container {
+        width: 100px;
+        height: 100px;
+        position: relative;
+      }
+
+      .checkmark-circle {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background: var(--success-gradient);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: grow 0.5s ease-in-out forwards;
+        animation-delay: 0.3s;
+      }
+
+      .checkmark-check {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        color: white;
+        font-size: 50px;
+        animation: reveal 0.5s ease-in-out forwards;
+        animation-delay: 0.8s;
+      }
+
+      .progress-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        background: var(--active-gradient);
+        width: 0%;
+        animation: progress 3s linear forwards;
+        animation-delay: 1.3s;
+      }
+
+      @keyframes grow {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes reveal {
+        from {
+          transform: translate(-50%, -50%) scale(0);
+        }
+        to {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      @keyframes progress {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+      }
+
+      .floating-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .fade-in-delay {
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      .fade-in-delay-1 {
+        animation-delay: 0.3s;
+      }
+
+      .fade-in-delay-2 {
+        animation-delay: 0.6s;
+      }
+
+      .fade-in-delay-3 {
+        animation-delay: 0.9s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 991px) {
+        .login-container {
+          flex-direction: column;
+          max-width: 95%;
+        }
+
+        .login-sidebar,
+        .login-content {
+          width: 100%;
+        }
+
+        .login-sidebar {
+          padding: 30px;
+        }
+
+        .features {
+          display: none;
+        }
+      }
+
+      .typing-animation::after {
+        content: "|";
+        animation: blink 1s infinite step-end;
+      }
+
+      @keyframes blink {
+        from,
+        to {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .input-animation {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .input-animation::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--active-gradient);
+        transition: width 0.5s ease;
+      }
+
+      .input-animation:focus-within::after {
+        width: 100%;
+      }
+
+      .login-btn-animation {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .login-btn-animation::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.6s;
+      }
+
+      .login-btn-animation:hover::before {
+        left: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Elements -->
+    <div class="background-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+
+    <div class="floating-code code-1">&lt;div class="portfolio"&gt;&lt;/div&gt;</div>
+    <div class="floating-code code-2">function authenticate() { return true; }</div>
+    <div class="floating-code code-3">const developer = new FullStack();</div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+      <!-- Sidebar Section -->
+      <div class="login-sidebar">
+        <div>
+          <div class="logo">
+            <div class="logo-icon"><i class="fas fa-code"></i></div>
+            <div class="logo-text">WiraSaputra</div>
+          </div>
+          <div class="welcome-text">
+            <h1 class="welcome-heading typing-animation">Selamat Datang Kembali</h1>
+            <p class="welcome-message">Login untuk mengakses portfolio profesional dan projek-projek terkini saya.</p>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature-item fade-in-delay fade-in-delay-1">
+            <div class="feature-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <div>
+              <h5>Projek Terkini</h5>
+              <p>Akses dan lihat detail projek terbaru</p>
+            </div>
+          </div>
+
+          <div class="feature-item fade-in-delay fade-in-delay-2">
+            <div class="feature-icon">
+              <i class="fas fa-code-branch"></i>
+            </div>
+            <div>
+              <h5>Kode Sumber</h5>
+              <p>Jelajahi repositori kode sumber</p>
+            </div>
+          </div>
+
+          <div class="feature-item fade-in-delay fade-in-delay-3">
+            <div class="feature-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div>
+              <h5>Kolaborasi</h5>
+              <p>Hubungkan dan berkolaborasi dengan tim</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Form Section -->
+      <div class="login-content">
+        <div class="login-form">
+          <h2 class="form-title">Login</h2>
+
+          <form id="loginForm">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <div class="input-group input-animation">
+                <input type="email" class="form-control" id="email" placeholder="nama@email.com" required />
+                <i class="fas fa-envelope input-icon"></i>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div class="input-group input-animation">
+                <input type="password" class="form-control" id="password" placeholder="Masukkan password" required />
+                <i class="fas fa-lock input-icon"></i>
+              </div>
+              <a href="#" class="forgot-password">Lupa password?</a>
+            </div>
+
+            <div class="form-check mb-4">
+              <input type="checkbox" class="form-check-input" id="remember" />
+              <label class="form-check-label" for="remember">Ingat saya</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary login-btn-animation"><i class="fas fa-sign-in-alt me-2"></i>Login</button>
+          </form>
+
+          <div class="divider">atau</div>
+
+          <div class="social-login">
+            <a href="#" class="social-btn btn-google">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-btn btn-facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-btn btn-github">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+
+          <div class="create-account">Belum memiliki akun? <a href="register.html">Daftar</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Animation -->
+    <div class="success-animation" id="successAnimation">
+      <div class="text-center">
+        <div class="checkmark-container">
+          <div class="checkmark-circle"></div>
+          <i class="fas fa-check checkmark-check"></i>
+        </div>
+        <h3 class="mt-4">Login Berhasil!</h3>
+        <p>Mengarahkan ke dashboard...</p>
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Elements
+      const loginForm = document.getElementById("loginForm");
+      const successAnimation = document.getElementById("successAnimation");
+
+      // Typing animation
+      const typingElement = document.querySelector(".typing-animation");
+
+      // Function to simulate typing
+      function typeText(el, text, i = 0) {
+        if (i === 0) {
+          el.textContent = "";
+        }
+
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          setTimeout(() => typeText(el, text, i + 1), 80);
+        }
+      }
+
+      // Start typing after page loads
+      window.addEventListener("load", () => {
+        typingElement.classList.remove("typing-animation");
+        setTimeout(() => {
+          const textToType = "Selamat Datang Kembali";
+          typeText(typingElement, textToType);
+          setTimeout(() => {
+            typingElement.classList.add("typing-animation");
+          }, textToType.length * 80 + 500);
+        }, 500);
+      });
+
+      // Handle login submission
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Get form values
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Simple validation
+        if (!email || !password) {
+          alert("Mohon lengkapi semua field");
+          return;
+        }
+
+        // Show loading on button
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Memproses...';
+        submitBtn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+          // Show success animation
+          successAnimation.classList.add("show");
+
+          // Redirect after animation completes
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 3500);
+        }, 1500);
+      });
+
+      // Animation for input fields
+      const inputFields = document.querySelectorAll(".form-control");
+      inputFields.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.classList.add("active");
+        });
+
+        input.addEventListener("blur", function () {
+          if (this.value === "") {
+            this.parentElement.classList.remove("active");
+          }
+        });
+      });
+
+      // Create floating code elements dynamically
+      function createFloatingCode() {
+        const codeLines = ["import React from 'react';", "const Skills = ['HTML', 'CSS', 'JavaScript'];", "export default Portfolio;", "addEventListener('load', init);", "console.log('Hello World!');"];
+
+        for (let i = 0; i < 5; i++) {
+          const code = document.createElement("div");
+          code.className = "floating-code";
+          code.textContent = codeLines[i % codeLines.length];
+          code.style.top = `${10 + Math.random() * 80}%`;
+          code.style.left = `${-20 - Math.random() * 20}%`;
+          code.style.animationDuration = `${25 + Math.random() * 20}s`;
+          code.style.animationDelay = `${Math.random() * 5}s`;
+          document.querySelector(".background-shapes").appendChild(code);
+        }
+      }
+
+      // Uncomment to create more floating code elements
+      // createFloatingCode();
+    </script>
+  </body>
+</html>

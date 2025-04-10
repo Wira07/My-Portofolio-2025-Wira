@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories - Wira Sukma Saputra</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --main-bg: #f8f9fa;
+        --sidebar-bg: #f1f3f5;
+        --primary-color: #4361ee;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --accent-color: #ff7700;
+        --hover-bg: #e2e6ea;
+        --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
+        --menu-icon-size: 20px;
+      }
+
+      body {
+        background-color: var(--main-bg);
+        color: var(--text-color);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sidebar {
+        background-color: var(--sidebar-bg);
+        height: 100vh;
+        position: fixed;
+        padding: 20px 0;
+        width: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .sidebar .nav-link {
+        color: var(--text-color);
+        padding: 12px 20px;
+        margin: 8px 15px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: var(--hover-bg);
+        transform: translateX(5px);
+      }
+
+      .sidebar .nav-link.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      }
+
+      .sidebar .nav-link i {
+        margin-right: 12px;
+        font-size: var(--menu-icon-size);
+        width: 25px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .sidebar .nav-link:hover i {
+        transform: scale(1.2);
+      }
+
+      .badge-menu {
+        position: absolute;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .logo {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 26px;
+        margin-bottom: 40px;
+        padding-left: 35px;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-icon {
+        background: var(--active-gradient);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+        height: 100%;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .category-card {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .category-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+        z-index: 1;
+      }
+
+      .category-card-content {
+        padding: 20px;
+        position: relative;
+        z-index: 2;
+        color: white;
+      }
+
+      .category-count {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        z-index: 2;
+      }
+
+      .category-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+      }
+
+      .category-description {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-menu {
+        display: flex;
+      }
+
+      .nav-menu-item {
+        margin: 0 15px;
+        font-weight: 500;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-menu-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .nav-menu-item.active {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .search-container {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-container input {
+        border-radius: 30px;
+        padding: 10px 15px 10px 40px;
+        background-color: var(--sidebar-bg);
+        border: none;
+        width: 250px;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-container input:focus {
+        width: 300px;
+        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+        transition: all 0.3s;
+      }
+
+      .user-avatar:hover {
+        transform: scale(1.1);
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .notification-icon {
+        position: relative;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(255, 119, 0, 0.3);
+      }
+
+      .bottom-menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+      }
+
+      .section-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 10px;
+      }
+
+      .category-filters {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      .filter-item {
+        padding: 8px 20px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        border-radius: 30px;
+        background-color: var(--sidebar-bg);
+        color: var(--text-color);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .filter-item:hover {
+        background-color: var(--hover-bg);
+      }
+
+      .filter-item.active {
+        background: var(--active-gradient);
+        color: white;
+        box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
+      }
+
+      .filter-item i {
+        margin-right: 8px;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--sidebar-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9d6;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8b1c1;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .card:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .card:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-code"></i></div>
+        WiraSaputra
+      </div>
+      <div class="nav flex-column">
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
+        <a href="categories.html" class="nav-link active"> <i class="fas fa-th-large"></i> Categories </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="downloads.html" class="nav-link">
+          <i class="fas fa-download"></i> Downloads
+          <span class="badge-menu">1</span>
+        </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="community.html" class="nav-link">
+          <i class="fas fa-users"></i> Community
+          <span class="badge-menu">3</span>
+        </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+      </div>
+
+      <div class="bottom-menu">
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Navigation -->
+      <div class="nav-top">
+        <div class="nav-menu">
+          <div class="nav-menu-item">New</div>
+          <div class="nav-menu-item">Portfolio</div>
+          <div class="nav-menu-item">Projects</div>
+          <div class="nav-menu-item">Skills</div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="form-control" placeholder="Search categories..." />
+          </div>
+          <div class="notification-icon me-4">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-avatar">
+            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="mb-1">Project Categories</h2>
+          <p class="text-muted">Browse projects by skill area and technology stack</p>
+        </div>
+        <div>
+          <button class="btn btn-primary"><i class="fas fa-plus me-2"></i> Add Category</button>
+        </div>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="category-filters">
+        <div class="filter-item active"><i class="fas fa-border-all"></i> All</div>
+        <div class="filter-item"><i class="fas fa-sort-amount-up"></i> Most Projects</div>
+        <div class="filter-item"><i class="fas fa-clock"></i> Recently Used</div>
+        <div class="filter-item"><i class="fas fa-star"></i> Favorites</div>
+        <div class="filter-item"><i class="fas fa-calendar"></i> By Year</div>
+      </div>
+
+      <!-- Categories Grid -->
+      <div class="row">
+        <!-- Web Development Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">12 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">Web Development</div>
+                <div class="category-description">HTML, CSS, JavaScript, React, Vue, Node.js</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Development Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">8 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">Mobile Apps</div>
+                <div class="category-description">React Native, Flutter, iOS, Android</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Analysis Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">9 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">Data Analysis</div>
+                <div class="category-description">Python, R, Tableau, PowerBI</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- UI/UX Design Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">6 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">UI/UX Design</div>
+                <div class="category-description">Figma, Adobe XD, Sketch</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Machine Learning Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">4 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">Machine Learning</div>
+                <div class="category-description">TensorFlow, PyTorch, Scikit-learn</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Development Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">3 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">Game Development</div>
+                <div class="category-description">Unity, Unreal Engine, C#</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend Development Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">7 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">Backend</div>
+                <div class="category-description">Java, Python, Node.js, PHP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cloud & DevOps Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">5 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">Cloud & DevOps</div>
+                <div class="category-description">AWS, Docker, Kubernetes, CI/CD</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IoT & Embedded Category -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
+              <div class="category-count">2 Projects</div>
+              <div class="category-card-content">
+                <div class="category-title">IoT & Embedded</div>
+                <div class="category-description">Arduino, Raspberry Pi, ESP32</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recently Used Categories -->
+      <div class="mt-5">
+        <div class="section-title">Recently Used Categories</div>
+        <div class="row">
+          <!-- Web Development Category -->
+          <div class="col-md-3 mb-4">
+            <div class="card">
+              <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
+                <div class="category-count">12 Projects</div>
+                <div class="category-card-content">
+                  <div class="category-title" style="font-size: 1.2rem">Web Development</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Analysis Category -->
+          <div class="col-md-3 mb-4">
+            <div class="card">
+              <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
+                <div class="category-count">9 Projects</div>
+                <div class="category-card-content">
+                  <div class="category-title" style="font-size: 1.2rem">Data Analysis</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Apps Category -->
+          <div class="col-md-3 mb-4">
+            <div class="card">
+              <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
+                <div class="category-count">8 Projects</div>
+                <div class="category-card-content">
+                  <div class="category-title" style="font-size: 1.2rem">Mobile Apps</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UI/UX Design Category -->
+          <div class="col-md-3 mb-4">
+            <div class="card">
+              <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
+                <div class="category-count">6 Projects</div>
+                <div class="category-card-content">
+                  <div class="category-title" style="font-size: 1.2rem">UI/UX Design</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
