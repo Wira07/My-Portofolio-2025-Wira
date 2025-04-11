@@ -17,6 +17,8 @@
         --hover-bg: #e2e6ea;
         --active-gradient: linear-gradient(90deg, #4361ee, #3a56d4);
         --menu-icon-size: 20px;
+        --sidebar-width: 250px;
+        --sidebar-width-collapsed: 70px;
       }
 
       body {
@@ -24,17 +26,20 @@
         color: var(--text-color);
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         overflow-x: hidden;
+        padding-top: 0;
       }
 
+      /* Sidebar Styles */
       .sidebar {
         background-color: var(--sidebar-bg);
         height: 100vh;
         position: fixed;
         padding: 20px 0;
-        width: 250px;
+        width: var(--sidebar-width);
         border-right: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
         z-index: 1000;
+        overflow-y: auto;
       }
 
       .sidebar .nav-link {
@@ -108,11 +113,49 @@
         box-shadow: 0 3px 8px rgba(67, 97, 238, 0.3);
       }
 
+      /* Main Content Styles */
       .main-content {
-        margin-left: 250px;
+        margin-left: var(--sidebar-width);
         padding: 20px;
+        transition: margin-left 0.3s ease;
       }
 
+      /* Mobile Header */
+      .mobile-header {
+        display: none;
+        background-color: var(--sidebar-bg);
+        padding: 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .sidebar-toggle {
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .mobile-logo {
+        font-weight: bold;
+        color: var(--primary-color);
+        font-size: 22px;
+      }
+
+      .mobile-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      /* Card & Category Styles */
       .card {
         border-radius: 15px;
         overflow: hidden;
@@ -180,6 +223,7 @@
         opacity: 0.9;
       }
 
+      /* Nav Top & Search */
       .nav-top {
         display: flex;
         align-items: center;
@@ -187,19 +231,23 @@
         margin-bottom: 30px;
         padding-bottom: 15px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        flex-wrap: wrap;
       }
 
       .nav-menu {
         display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
       }
 
       .nav-menu-item {
-        margin: 0 15px;
+        margin: 0 10px 10px 0;
         font-weight: 500;
         padding: 8px 15px;
         border-radius: 20px;
         cursor: pointer;
         transition: all 0.3s;
+        white-space: nowrap;
       }
 
       .nav-menu-item:hover {
@@ -215,6 +263,7 @@
       .search-container {
         position: relative;
         margin-right: 20px;
+        margin-bottom: 10px;
       }
 
       .search-container input {
@@ -225,11 +274,6 @@
         width: 250px;
         transition: all 0.3s;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      }
-
-      .search-container input:focus {
-        width: 300px;
-        box-shadow: 0 3px 15px rgba(67, 97, 238, 0.1);
       }
 
       .search-icon {
@@ -262,6 +306,7 @@
 
       .notification-icon {
         position: relative;
+        cursor: pointer;
       }
 
       .notification-badge {
@@ -306,6 +351,7 @@
         border-radius: 10px;
       }
 
+      /* Category Filters */
       .category-filters {
         display: flex;
         flex-wrap: wrap;
@@ -314,7 +360,7 @@
 
       .filter-item {
         padding: 8px 20px;
-        margin-right: 15px;
+        margin-right: 10px;
         margin-bottom: 15px;
         border-radius: 30px;
         background-color: var(--sidebar-bg);
@@ -322,6 +368,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s;
+        white-space: nowrap;
       }
 
       .filter-item:hover {
@@ -390,34 +437,198 @@
       .card:nth-child(6) {
         animation-delay: 0.6s;
       }
+
+      /* Media Queries for Responsiveness */
+      @media (max-width: 1199.98px) {
+        .search-container input:focus {
+          width: 220px;
+        }
+
+        .category-title {
+          font-size: 1.3rem;
+        }
+      }
+
+      @media (max-width: 991.98px) {
+        .category-description {
+          font-size: 0.8rem;
+        }
+
+        .search-container input {
+          width: 200px;
+        }
+
+        .search-container input:focus {
+          width: 200px;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        body {
+          padding-top: 70px;
+        }
+
+        .mobile-header {
+          display: flex;
+        }
+
+        .sidebar {
+          left: -280px;
+          width: 280px;
+          transition: left 0.3s ease;
+          box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-open {
+          left: 0;
+        }
+
+        .main-content {
+          margin-left: 0;
+          padding: 15px;
+        }
+
+        .search-container {
+          width: 100%;
+          margin-right: 0;
+        }
+
+        .search-container input {
+          width: 100%;
+        }
+
+        .nav-top {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .category-title {
+          font-size: 1.4rem;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .nav-menu {
+          overflow-x: auto;
+          width: 100%;
+          padding-bottom: 5px;
+          justify-content: flex-start;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+          height: 3px;
+        }
+
+        .filter-text {
+          display: none;
+        }
+
+        .filter-item {
+          padding: 8px 12px;
+        }
+
+        .filter-item i {
+          margin-right: 0;
+        }
+      }
+
+      @media (max-width: 575.98px) {
+        .category-card {
+          height: 180px;
+        }
+
+        .category-title {
+          font-size: 1.2rem;
+        }
+
+        .category-description {
+          font-size: 0.75rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .section-title {
+          font-size: 1.2rem;
+        }
+
+        .logo {
+          padding-left: 20px;
+          font-size: 22px;
+        }
+
+        .logo-icon {
+          width: 35px;
+          height: 35px;
+        }
+
+        .sidebar .nav-link {
+          padding: 10px 15px;
+          margin: 5px 10px;
+        }
+      }
+
+      /* For very small screens */
+      @media (max-width: 359.98px) {
+        .category-card {
+          height: 160px;
+        }
+
+        .category-title {
+          font-size: 1.1rem;
+        }
+
+        .category-count {
+          font-size: 10px;
+          padding: 3px 8px;
+        }
+      }
     </style>
   </head>
   <body>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
       <div class="logo">
         <div class="logo-icon"><i class="fas fa-code"></i></div>
-        WiraSaputra
+        <span class="logo-text">WiraSaputra</span>
       </div>
       <div class="nav flex-column">
-        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> Home </a>
-        <a href="categories.html" class="nav-link active"> <i class="fas fa-th-large"></i> Categories </a>
-        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> Favorites </a>
+        <a href="index.html" class="nav-link"> <i class="fas fa-home"></i> <span>Home</span> </a>
+        <a href="categories.html" class="nav-link active"> <i class="fas fa-th-large"></i> <span>Categories</span> </a>
+        <a href="favorites.html" class="nav-link"> <i class="fas fa-heart"></i> <span>Favorites</span> </a>
         <a href="downloads.html" class="nav-link">
-          <i class="fas fa-download"></i> Downloads
+          <i class="fas fa-download"></i> <span>Downloads</span>
           <span class="badge-menu">1</span>
         </a>
-        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> Friends </a>
+        <a href="friends.html" class="nav-link"> <i class="fas fa-user-friends"></i> <span>Friends</span> </a>
         <a href="community.html" class="nav-link">
-          <i class="fas fa-users"></i> Community
+          <i class="fas fa-users"></i> <span>Community</span>
           <span class="badge-menu">3</span>
         </a>
-        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> History </a>
+        <a href="history.html" class="nav-link"> <i class="fas fa-history"></i> <span>History</span> </a>
       </div>
 
       <div class="bottom-menu">
-        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> Settings </a>
-        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> Log out </a>
+        <a href="settings.html" class="nav-link"> <i class="fas fa-cog"></i> <span>Settings</span> </a>
+        <a href="logout.html" class="nav-link"> <i class="fas fa-sign-out-alt"></i> <span>Log out</span> </a>
+      </div>
+    </div>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+      <button id="sidebarToggle" class="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="mobile-logo">WiraSaputra</div>
+      <div class="mobile-actions">
+        <div class="notification-icon">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </div>
       </div>
     </div>
 
@@ -437,41 +648,40 @@
             <i class="fas fa-search search-icon"></i>
             <input type="text" class="form-control" placeholder="Search categories..." />
           </div>
-          <div class="notification-icon me-4">
+          <div class="notification-icon me-4 d-none d-md-block">
             <i class="fas fa-bell"></i>
             <span class="notification-badge">3</span>
           </div>
-          <div class="user-avatar">
-            <img src="https://mir-s3-cdn-cf.behance.net/user/230/cbb0c21467553021.65524aad2507a.jpg" alt="User Avatar" />
-
+          <div class="user-avatar d-none d-md-block">
+            <img src="/api/placeholder/150/150" alt="User Avatar" />
           </div>
         </div>
       </div>
 
       <!-- Page Header -->
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <div class="mb-3 mb-md-0">
           <h2 class="mb-1">Project Categories</h2>
           <p class="text-muted">Browse projects by skill area and technology stack</p>
         </div>
         <div>
-          <button class="btn btn-primary"><i class="fas fa-plus me-2"></i> Add Category</button>
+          <button class="btn btn-primary"><i class="fas fa-plus me-2"></i> <span class="d-none d-sm-inline">Add Category</span></button>
         </div>
       </div>
 
       <!-- Category Filters -->
       <div class="category-filters">
-        <div class="filter-item active"><i class="fas fa-border-all"></i> All</div>
-        <div class="filter-item"><i class="fas fa-sort-amount-up"></i> Most Projects</div>
-        <div class="filter-item"><i class="fas fa-clock"></i> Recently Used</div>
-        <div class="filter-item"><i class="fas fa-star"></i> Favorites</div>
-        <div class="filter-item"><i class="fas fa-calendar"></i> By Year</div>
+        <div class="filter-item active"><i class="fas fa-border-all"></i> <span class="filter-text">All</span></div>
+        <div class="filter-item"><i class="fas fa-sort-amount-up"></i> <span class="filter-text">Most Projects</span></div>
+        <div class="filter-item"><i class="fas fa-clock"></i> <span class="filter-text">Recent</span></div>
+        <div class="filter-item"><i class="fas fa-star"></i> <span class="filter-text">Favorites</span></div>
+        <div class="filter-item"><i class="fas fa-calendar"></i> <span class="filter-text">By Year</span></div>
       </div>
 
       <!-- Categories Grid -->
       <div class="row">
         <!-- Web Development Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">12 Projects</div>
@@ -484,7 +694,7 @@
         </div>
 
         <!-- Mobile Development Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">8 Projects</div>
@@ -497,7 +707,7 @@
         </div>
 
         <!-- Data Analysis Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">9 Projects</div>
@@ -510,7 +720,7 @@
         </div>
 
         <!-- UI/UX Design Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">6 Projects</div>
@@ -523,7 +733,7 @@
         </div>
 
         <!-- Machine Learning Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">4 Projects</div>
@@ -536,7 +746,7 @@
         </div>
 
         <!-- Game Development Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">3 Projects</div>
@@ -549,7 +759,7 @@
         </div>
 
         <!-- Backend Development Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">7 Projects</div>
@@ -562,7 +772,7 @@
         </div>
 
         <!-- Cloud & DevOps Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">5 Projects</div>
@@ -575,7 +785,7 @@
         </div>
 
         <!-- IoT & Embedded Category -->
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card">
             <div class="category-card" style="background-image: url('/api/placeholder/400/300')">
               <div class="category-count">2 Projects</div>
@@ -593,7 +803,7 @@
         <div class="section-title">Recently Used Categories</div>
         <div class="row">
           <!-- Web Development Category -->
-          <div class="col-md-3 mb-4">
+          <div class="col-6 col-md-3 mb-4">
             <div class="card">
               <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
                 <div class="category-count">12 Projects</div>
@@ -605,7 +815,7 @@
           </div>
 
           <!-- Data Analysis Category -->
-          <div class="col-md-3 mb-4">
+          <div class="col-6 col-md-3 mb-4">
             <div class="card">
               <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
                 <div class="category-count">9 Projects</div>
@@ -617,7 +827,7 @@
           </div>
 
           <!-- Mobile Apps Category -->
-          <div class="col-md-3 mb-4">
+          <div class="col-6 col-md-3 mb-4">
             <div class="card">
               <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
                 <div class="category-count">8 Projects</div>
@@ -629,7 +839,7 @@
           </div>
 
           <!-- UI/UX Design Category -->
-          <div class="col-md-3 mb-4">
+          <div class="col-6 col-md-3 mb-4">
             <div class="card">
               <div class="category-card" style="background-image: url('/api/placeholder/300/200'); height: 150px">
                 <div class="category-count">6 Projects</div>
@@ -644,5 +854,21 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Toggle sidebar on mobile
+      document.getElementById("sidebarToggle").addEventListener("click", function () {
+        document.getElementById("sidebar").classList.toggle("sidebar-open");
+      });
+
+      // Close sidebar when clicking outside on mobile
+      document.addEventListener("click", function (event) {
+        const sidebar = document.getElementById("sidebar");
+        const sidebarToggle = document.getElementById("sidebarToggle");
+
+        if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target) && sidebar.classList.contains("sidebar-open")) {
+          sidebar.classList.remove("sidebar-open");
+        }
+      });
+    </script>
   </body>
 </html>
